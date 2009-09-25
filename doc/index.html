@@ -1,0 +1,292 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii"> 
+<title>tree.hh: an STL-like C++ tree class</title>
+<link rel="stylesheet" type="text/css" href="tree.css"> 
+</head>
+<body>
+<div id="container">
+   <div id="title">
+      <img src="tree.jpg" />
+      <div id="titletxt">
+         <h1>tree.hh: an STL-like C++ tree class</h1>
+         <h2 class="author">
+             <a href="http://www.aei.mpg.de/~peekas/">Kasper Peeters</a>, kasper.peeters (at) gmail.com
+         </h2>
+      </div>
+   </div>
+
+<h2>Overview</h2> 
+
+<div class="text">
+The <code>tree.hh</code> library for C++ provides an STL-like container class
+for <i>n</i>-ary trees, templated over the data stored at the nodes.  Various
+types of iterators are provided (post-order, pre-order, and
+others). Where possible the access methods are compatible with the STL
+or alternative algorithms are available. The library is available
+under the terms of the GNU General Public License version 2 or 3.</div>
+
+<div class="text">Documentation is available in the form of a <a
+href="tree-VERSION/tree.ps">postscript</a> and a <a href="tree-VERSION/tree.pdf">pdf</a> file (also
+available in the tarball as a LaTeX file). This documentation is still a
+bit short and not entirely complete. See the test program (included in
+the distribution) for an example of how to use
+tree.hh. Also look at the <a href="#example">simple example</a>
+below. There is also some <a href="doxygen/html">doxygen generated documentation</a>.</div>
+
+
+<div class="text">The <code>tree.hh</code> library is meant for generic <i>n</i>-ary
+trees. If you are only interested in AVL binary search trees
+(Adelson,Velskii & Landis), you may want to have a look at the
+<a href="http://www.geocities.com/wkaras/gen_cpp/avl_tree.html">C++
+AVL tree template</a> page. </div>
+
+<h2>License</h2> 
+
+<div class="text">The <code>tree.hh</code> code is available under the terms of the 
+GNU General Public License <a
+href="http://www.gnu.org/licenses/old-licenses/gpl-2.0.html">2</a>
+or <a href="http://www.gnu.org/copyleft/gpl.html">3</a>. If you would
+  like to use <code>tree.hh</code> under different conditions, contact
+  me and we will work something out.</div>
+
+<div class="text">If you use <code>tree.hh</code>,
+please satisfy my curiosity and write me a small email with
+a bit of explanation of your software and the role of my tree 
+class in it.</div>
+
+<h2>Download</h2> 
+
+<div class="text">Everything (the header file, examples, documentation
+and all other things referred to on this page) is contained in the
+tarball 
+<blockquote>
+<a href="tree-VERSION.tar.gz">tree-VERSION.tar.gz</a></blockquote>  
+Feel free to copy the
+header <a href="tree-VERSION/tree.hh">tree.hh</a> (which is all you need code-wise) into your own
+source directory as long as you respect the license (see above). 
+The list of changes can be found in the <a href="ChangeLog">ChangeLog</a>.</div>
+
+<div class="text">See the intro above for links to the documentation. There is a very
+simple demonstration program available, <a
+href="tree-VERSION/tree_example.cc">tree_example.cc</a> (also included in the tarball),
+which is discussed <a href="#example">below</a>. There is also a small
+test program, <a href="tree-VERSION/test_tree.cc">test_tree.cc</a>, which makes use
+of the <a
+href="tree-VERSION/tree_util.hh">tree_util.hh</a> utility functions by
+Linda Buisman; the output
+should be exactly identical to the <a
+href="tree-VERSION/test_tree.output">test_tree.output</a> file.</div>
+
+<div class="text">The current version works with GNU gcc 3.x and
+higher, Borland&nbsp;C++&nbsp;builder and Microsoft Visual C++ 7.1 and
+higher. It is compatible with STLport.</div>
+
+<div class="text">Tony Cook has provided a version for the buggy Microsoft Visual C++
+compilers up to version 7.0. You will have to use a special
+version of the header file, <a href="tree-VERSION/tree_msvc.hh">tree_msvc.hh</a>
+(currently based on the original tree.hh version
+<strong>1.80</strong>). The difference is that all members of the
+iterator and sibling_iterator subclasses have been moved inside the
+class definitions. If you get unresolved symbols in the linking phase,
+or other weird compiler errors, you should use this header. Microsoft
+users are urged to upgrade to version 7.1 which works with tree.hh out
+of the box.</div>
+
+<h2>Mailing list</h2>
+
+<div class="text">There is a mailing list for tree.hh, which is mostly
+used for announcements of new releases, but is also open for discussions
+about tree.hh which are of general interest. To subscribe, please
+visit <a href="http://www.hepforge.org/lists/listinfo/tree-hh">the
+tree-hh mailing list web page</a>.</div>
+
+<div class="text">I also announce major updates on <a
+href="http://www.freshmeat.net">Freshmeat</a> though not as often as
+by email.</div>
+
+<h2>Projects using tree.hh</h2>
+
+<div class="text">The <code>tree.hh</code> library is used in various projects:
+<dl>
+<dt><strong><a
+href="../cadabra/">Cadabra</a></strong></dt>
+<dd>A field-theory motivated approach to symbolic computer
+algebra.</dd>
+<dt><strong><a
+href="http://www.gnu.org/software/gnash/">Gnash</a></strong></dt>
+<dd>Gnash is a GNU Flash movie player. Previously, it was only
+possible to play flash movies with proprietary software. While there
+are some other free flash players, none support anything beyond SWF
+v4. Gnash is based on GameSWF, and supports many SWF v7 features.</dd>
+<dt><strong><a href="http://www.cs.sfu.ca/~anoop/courses/CMPT-379-Fall-2007/index.html">Principles of Compiler Design</a></strong></dt>
+<dd>A course in compiler design at the Simon Fraser University, Canada.</dd>
+<dt><strong><a href="http://sourceforge.net/projects/liborigin/">liborigin</a></strong></dt>
+<dd>A library for reading OriginLab OPJ project files, which is used
+  by <a href="http://soft.proindependent.com/qtiplot.html">QtiPlot</a>
+  and <a href="http://labplot.sourceforge.net/">LabPlot</a>, two
+  applications for data analysis and visualisation.</dd>
+<dt><strong><a href="http://www.echem.uni-tuebingen.de/~bs/echem/software/EChem++/echem++.shtml">EChem++</a></strong></dt>
+<dd>A project realizing the idea of a Problem Solving Environment
+(PSE) in the field of computational electrochemistry.  Computer
+controlled experimental measurements, numerical simulation and
+analysis of electrochemical processes will be combined under a common
+user interface.</dd>
+<dt><strong><a
+href="http://www.infor.uva.es/~jadiego/">LZCS</a></strong></dt>
+<dd>A semistructured document transformation tool. LZCS compresses
+structured documents taking advantage of the redundant information
+that can appear in the structure. The main idea is that frequently
+repeated subtrees may exist and these can be replaced by a backward
+reference to their first occurance. See the <a
+href="http://www.dcc.uchile.cl/~gnavarro/ps/dcc04.1.ps.gz">accompanying
+paper</a> for more details.</dd>
+<dt><strong><a href="http://libofx.sourceforge.net/">libOFX</a></strong></dt>
+<dd>A parser and an API designed to allow applications to very easily support OFX
+command responses, usually provided by financial institutions for
+statement downloads.</dd>
+<dt><strong>A genetic programming project</strong></dt>
+<dd>See this <a
+href="http://www.cs.adfa.edu.au/~shanyin/publications/peel.pdf">paper</a> for
+more information.</dd>
+<dt><strong><a href="http://garraf.epsevg.upc.es/freeling/">FreeLing</a></strong></dt>
+<dd> The FreeLing package consists of a library providing language analysis services (such as morfological analysis, date recognition, PoS tagging, etc.)</dd>
+</dl>
+Let me know about your project when you are using
+<code>tree.hh</code>, so that I can add it to the list.</div>
+
+<a name="example"></a>
+<h2>Simple example</h2> 
+
+<div class="text">The following program constructs a tree of std::string nodes, puts some content in
+it and applies the <code>find</code> algorithm to find the node with content
+"two". It then prints the content of all the children of this node.
+You can download the source <a href="tree-VERSION/tree_example.cc">tree_example.cc</a> if you're too
+lazy to type it in.
+<blockquote><pre>
+#include &lt;algorithm&gt;
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+#include "tree.hh"
+
+using namespace std;
+
+int main(int, char **)
+   {
+   tree&lt;string&gt; tr;
+   tree&lt;string&gt;::iterator top, one, two, loc, banana;
+
+   top=tr.begin();
+   one=tr.insert(top, "one");
+   two=tr.append_child(one, "two");
+   tr.append_child(two, "apple");
+   banana=tr.append_child(two, "banana");
+   tr.append_child(banana,"cherry");
+   tr.append_child(two, "peach");
+   tr.append_child(one,"three");
+
+   loc=find(tr.begin(), tr.end(), "two");
+   if(loc!=tr.end()) {
+      tree&lt;string&gt;::sibling_iterator sib=tr.begin(loc);
+      while(sib!=tr.end(loc)) {
+         cout &lt;&lt; (*sib) &lt;&lt; endl;
+         ++sib;
+         }
+      cout &lt;&lt; endl;
+      tree&lt;string&gt;::iterator sib2=tr.begin(loc);
+      tree&lt;string&gt;::iterator end2=tr.end(loc);
+      while(sib2!=end2) {
+         for(int i=0; i&lt;tr.depth(sib2)-2; ++i) 
+            cout &lt;&lt; " ";
+         cout &lt;&lt; (*sib2) &lt;&lt; endl;
+         ++sib2;
+         }
+      }
+   }
+</pre></blockquote>
+The output of this program is
+<blockquote><pre>
+apple
+banana
+peach
+
+apple
+banana
+ cherry
+peach
+</pre></blockquote>
+Note that this example only has one element at the top of the tree (in
+this case that is the node containing "one") but it is possible to
+have an arbitary number of such elements (then the tree is more like a
+"bush"). Observe the way in which the two types of iterators work. The
+first block of output, obtained using the sibling_iterator, only
+displays the children directly below "two". The second block iterates
+over all children at any depth below "two". In the second output
+block, the <code>depth</code> member has been used to determine the
+distance of a given node to the root of the tree.  </div>
+
+<h2>Data structure</h2> 
+
+<div class="text">The data structure of the <code>tree</code> class is depicted
+below (see the documentation for more detailed information). 
+Each node contains a pointer to the first and last child element,
+and each child contains pointers to its previous and next sibling:
+<blockquote><small><pre>
+           first_child        first_child 
+ root_node-+----------node--+----->-------node
+           |           |    |               |   
+           |           |    |               V   next_sibling
+           |           |    |               |
+                       |    |             node
+                       |    |               |
+                       |    |               V   next_sibling
+                       |    | last_child    |
+                       |    +----->-------node
+                       |                        
+                       V next_sibling           
+                       |                       
+                       |     first_child                  
+                      node--+----->-------node
+                       |    |               |   
+                       |    |               V   next_sibling
+                       |    |               |
+                       |    +-------------node
+                       .
+                       .</pre></small></blockquote>
+Iterators come in two types. The normal <code>iterator</code> iterates depth-first
+over all nodes. The beginning and end of the tree can be obtained by using the
+<code>begin()</code> and <code>end()</code> members. The other type of iterator
+only iterates over the nodes at one given depth (ie. over all siblings). One
+typically uses these iterators to iterate over all children of a node, in which
+case the [begin,end) range can be obtained by calling <code>begin(iterator)</code>
+and <code>end(iterator)</code>.</div>
+
+<div class="text">Iterators can be converted from one type to the other; this includes the `end' 
+iterators (all intervals are as usual closed at the beginning and open
+at the end).</div>
+</div>
+
+<!-- Start of StatCounter Code 
+<script type="text/javascript">
+var sc_project=4068217; 
+var sc_invisible=0; 
+var sc_partition=50; 
+var sc_click_stat=1; 
+var sc_security="3f2419f9"; 
+var sc_text=1; 
+</script>
+
+<script type="text/javascript"
+		  src="http://www.statcounter.com/counter/counter.js"></script><noscript><div class="statcounter"><a title="free
+		  hit counter"
+		  href="http://www.statcounter.com/free_hit_counter.html"
+		  target="_blank"><img class="statcounter"
+		  src="http://c.statcounter.com/4068217/0/3f2419f9/0/" alt="free
+		  hit counter" ></a></div></noscript>
+ End of StatCounter Code -->
+
+   </div>
+</div>
+</body>
+</html>

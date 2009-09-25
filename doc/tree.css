@@ -1,0 +1,44 @@
+
+body {
+	 font: 10pt "Lucida Grande", "Lucida Sans Unicode", Arial, Verdana, sans-serif;
+}
+div#container {
+	 margin: auto;
+	 width: 800px;
+/*	 background: #dfe4ea; */
+}
+div#titletxt {
+	 margin: 30px 0 30px 240px;
+	 height: 120px;
+}
+#title img {
+    width: 800px;
+	 margin: 0 0 -160px 0;
+	 border-bottom: 2px solid white;
+}
+h2 {
+	 width: 700px;
+	 margin: 2ex 0 2ex 0;
+    border-bottom: 1px solid #7070d0;
+}
+div.text {
+	 margin-left: 120px;
+	 margin-bottom: 2ex;
+	 width: 580px;
+}
+#title h1 {
+    font-size: 30px;
+	 color: black;
+}
+#title h2 {
+    font-size: 11pt;
+	 font-weight: normal;
+	 color: black;
+	 border-bottom: 0px;
+}
+pre {
+	 font-size: smaller;
+	 padding: 1ex;
+	 border: 1px solid #8080e0;
+	 width: 500px;
+}
