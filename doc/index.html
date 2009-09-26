@@ -27,14 +27,12 @@ others). Where possible the access methods are compatible with the STL
 or alternative algorithms are available. The library is available
 under the terms of the GNU General Public License version 2 or 3.</div>
 
-<div class="text">Documentation is available in the form of a <a
-href="tree-VERSION/tree.ps">postscript</a> and a <a href="tree-VERSION/tree.pdf">pdf</a> file (also
-available in the tarball as a LaTeX file). This documentation is still a
-bit short and not entirely complete. See the test program (included in
-the distribution) for an example of how to use
-tree.hh. Also look at the <a href="#example">simple example</a>
-below. There is also some <a href="doxygen/html">doxygen generated documentation</a>.</div>
-
+<div class="text">Documentation is available in the form of
+a <a href="tree.pdf">pdf</a> file (also available in the tarball as a
+LaTeX file). See the test program (included in the distribution) for
+an example of how to use tree.hh. Also look at
+the <a href="#example">simple example</a> below. There is also
+some <a href="doxygen/html">doxygen generated documentation</a>.</div>
 
 <div class="text">The <code>tree.hh</code> library is meant for generic <i>n</i>-ary
 trees. If you are only interested in AVL binary search trees
@@ -56,43 +54,34 @@ please satisfy my curiosity and write me a small email with
 a bit of explanation of your software and the role of my tree 
 class in it.</div>
 
+
 <h2>Download</h2> 
 
 <div class="text">Everything (the header file, examples, documentation
 and all other things referred to on this page) is contained in the
 tarball 
 <blockquote>
-<a href="tree-VERSION.tar.gz">tree-VERSION.tar.gz</a></blockquote>  
+<a href="tree-2.65.tar.gz">tree-2.65.tar.gz</a></blockquote>  
 Feel free to copy the
-header <a href="tree-VERSION/tree.hh">tree.hh</a> (which is all you need code-wise) into your own
+header <a href="tree-2.65/tree.hh">tree.hh</a> (which is all you need code-wise) into your own
 source directory as long as you respect the license (see above). 
 The list of changes can be found in the <a href="ChangeLog">ChangeLog</a>.</div>
 
 <div class="text">See the intro above for links to the documentation. There is a very
 simple demonstration program available, <a
-href="tree-VERSION/tree_example.cc">tree_example.cc</a> (also included in the tarball),
+href="tree-2.65/tree_example.cc">tree_example.cc</a> (also included in the tarball),
 which is discussed <a href="#example">below</a>. There is also a small
-test program, <a href="tree-VERSION/test_tree.cc">test_tree.cc</a>, which makes use
+test program, <a href="tree-2.65/test_tree.cc">test_tree.cc</a>, which makes use
 of the <a
-href="tree-VERSION/tree_util.hh">tree_util.hh</a> utility functions by
+href="tree-2.65/tree_util.hh">tree_util.hh</a> utility functions by
 Linda Buisman; the output
 should be exactly identical to the <a
-href="tree-VERSION/test_tree.output">test_tree.output</a> file.</div>
+href="tree-2.65/test_tree.output">test_tree.output</a> file.</div>
 
 <div class="text">The current version works with GNU gcc 3.x and
 higher, Borland&nbsp;C++&nbsp;builder and Microsoft Visual C++ 7.1 and
-higher. It is compatible with STLport.</div>
-
-<div class="text">Tony Cook has provided a version for the buggy Microsoft Visual C++
-compilers up to version 7.0. You will have to use a special
-version of the header file, <a href="tree-VERSION/tree_msvc.hh">tree_msvc.hh</a>
-(currently based on the original tree.hh version
-<strong>1.80</strong>). The difference is that all members of the
-iterator and sibling_iterator subclasses have been moved inside the
-class definitions. If you get unresolved symbols in the linking phase,
-or other weird compiler errors, you should use this header. Microsoft
-users are urged to upgrade to version 7.1 which works with tree.hh out
-of the box.</div>
+higher (I no longer support older versions of Visual C++). It is
+compatible with STLport.</div>
 
 <h2>Mailing list</h2>
 
@@ -162,7 +151,7 @@ Let me know about your project when you are using
 <div class="text">The following program constructs a tree of std::string nodes, puts some content in
 it and applies the <code>find</code> algorithm to find the node with content
 "two". It then prints the content of all the children of this node.
-You can download the source <a href="tree-VERSION/tree_example.cc">tree_example.cc</a> if you're too
+You can download the source <a href="tree-2.65/tree_example.cc">tree_example.cc</a> if you're too
 lazy to type it in.
 <blockquote><pre>
 #include &lt;algorithm&gt;

@@ -1,0 +1,311 @@
+empty tree to begin with:
+0
+ 'more text' is sibling 2 in its sibling range
+filled tree:
+-----
+extra
+html
+  body
+    before h1
+    h1
+      some text
+    more text
+-----
+filled tree, post-order traversal:
+-----
+extra
+    before h1
+      some text
+    h1
+    more text
+  body
+html
+-----
+swapped elements:
+-----
+extra
+html
+  body
+    h1
+      some text
+    before h1
+    more text
+-----
+swapped back:
+-----
+extra
+html
+  body
+    before h1
+    h1
+      some text
+    more text
+-----
+copied tree:
+-----
+h1
+  some text
+-----
+result of search for h1 and kasper:
+-----
+h1
+  some text
+-----
+kasper not found
+
+replacement tree:
+-----
+h3
+  text in h3
+-----
+-----
+extra
+html
+  body
+    before h1
+    h1
+      some text
+    more text
+-----
+filled tree with replacement done:
+-----
+extra
+html
+  body
+    before h1
+    h3
+      text in h3
+    more text
+-----
+-----
+extra
+html
+  body
+    before h1
+    <foobar>
+      text in h3
+    more text
+-----
+-----
+extra
+html
+  body
+    before h1
+    <foobar>
+      text in h3
+    more
+    more text
+-----
+moved content:
+-----
+extra
+html
+  body
+    <foobar>
+      text in h3
+      before h1
+    more
+    more text
+-----
+children of h1:
+text in h3
+before h1
+
+flattened (at h3) tree:
+-----
+extra
+html
+  body
+    <foobar>
+    text in h3
+    before h1
+    more
+    more text
+-----
+children of body erased:
+-----
+extra
+html
+  body
+-----
+h1 not found
+erased tree:
+-----
+html
+  body
+-----
+copies still exist:
+-----
+extra
+html
+  body
+    before h1
+    <foobar>
+      text in h3
+    more
+    more text
+-----
+-----
+extra
+html
+  body
+    before h1
+    <foobar>
+      text in h3
+    more
+    more text
+-----
+testing comparison functions:
+1 (should be 1)
+<foobar>
+0 (should be 0)
+0 (should be 0)
+1 (should be 1)
+tree flattened, test again
+-----
+extra
+html
+  body
+    before h1
+    <foobar>
+    text in h3
+    more
+    more text
+-----
+0 (should be 0)
+1 (should be 1)
+0 (should be 0)
+0 (should be 0)
+unsorted subtree:
+-----
+extra
+html
+  body
+    before h1
+    modified
+    text in h3
+      ccc
+      bbb
+      bbb
+      aaa
+    more
+    more text
+-----
+partially sorted subtree: (sorted from text in h3 to more text, excluding the last element)
+-----
+extra
+html
+  body
+    before h1
+    modified
+    more
+    text in h3
+      ccc
+      bbb
+      bbb
+      aaa
+    more text
+-----
+sorted subtree:
+-----
+extra
+html
+  body
+    before h1
+    modified
+    more
+    more text
+    text in h3
+      aaa
+      bbb
+      bbb
+      ccc
+-----
+test merge
+-----
+html
+  head
+    title
+  body
+    h1
+    h1
+-----
+-----
+head
+  another title
+-----
+-----
+html
+  head
+    title
+  body
+    h1
+    h1
+head
+  another title
+-----
+-----
+html
+  head
+    title
+    another title
+  body
+    h1
+    h1
+head
+  another title
+-----
+-----
+  another title
+head
+    h1
+    h1
+  body
+    another title
+    title
+  head
+html
+-----
+-----
+head
+  another title
+html
+  body
+    h1
+    h1
+  head
+    another title
+    title
+-----
+A
+B
+C
+D
+E
+F
+G
+H
+I
+-----
+A
+  B
+    E
+    F
+  C
+    G
+    H
+  D
+    I
+-----
+-----
+A
+  B
+    E
+    F
+  C
+    G
+    H
+  wrap
+    D
+      I
+-----
