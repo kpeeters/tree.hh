@@ -1,16 +1,17 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+              "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta name="verify-v1"
 		content="LkU+jobePpu3F8I4GPuTiOjrTukmo1qpWT+dT6SeAfk=" />
-<meta http-equiv="Content-Type" content="text/html; charset=us-ascii"> 
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii" /> 
 <title>tree.hh: an STL-like C++ tree class</title>
-<link rel="stylesheet" type="text/css" href="tree.css"> 
+<link rel="stylesheet" type="text/css" href="tree.css" /> 
 </head>
 <body>
 <div id="container">
    <div id="title">
-      <img src="tree.jpg" />
+      <img src="tree.jpg" alt="[background image]"/>
       <div id="titletxt">
          <h1>tree.hh: an STL-like C++ tree class</h1>
          <h2 class="author">
@@ -38,7 +39,7 @@ some <a href="doxygen/html/index.html">doxygen generated documentation</a>.</div
 
 <div class="text">The <code>tree.hh</code> library is meant for generic <i>n</i>-ary
 trees. If you are only interested in AVL binary search trees
-(Adelson,Velskii & Landis), you may want to have a look at the
+(Adelson,Velskii &amp; Landis), you may want to have a look at the
 <a href="http://www.geocities.com/wkaras/gen_cpp/avl_tree.html">C++
 AVL tree template</a> page. </div>
 
@@ -61,10 +62,11 @@ class in it.</div>
 
 <div class="text">Everything (the header file, examples, documentation
 and all other things referred to on this page) is contained in the
-tarball 
-<blockquote>
-<a href="tree-2.65.tar.gz">tree-2.65.tar.gz</a></blockquote>  
-Feel free to copy the
+tarball</div>
+<div class="filename">
+<a href="tree-2.65.tar.gz">tree-2.65.tar.gz</a>
+</div>
+<div class="text">Feel free to copy the
 header <a href="tree.hh">tree.hh</a> (which is all you need code-wise) into your own
 source directory as long as you respect the license (see above). 
 The list of changes can be found in the <a href="ChangeLog">ChangeLog</a>.</div>
@@ -153,9 +155,9 @@ Let me know about your project when you are using
 <div class="text">The following program constructs a tree of std::string nodes, puts some content in
 it and applies the <code>find</code> algorithm to find the node with content
 "two". It then prints the content of all the children of this node.
-You can download the source <a href="tree-2.65/tree_example.cc">tree_example.cc</a> if you're too
-lazy to type it in.
-<blockquote><pre>
+You can download the source <a href="tree_example.cc">tree_example.cc</a> if you're too
+lazy to type it in.</div>
+<pre>
 #include &lt;algorithm&gt;
 #include &lt;string&gt;
 #include &lt;iostream&gt;
@@ -195,9 +197,11 @@ int main(int, char **)
          }
       }
    }
-</pre></blockquote>
+</pre>
+<div class="text">
 The output of this program is
-<blockquote><pre>
+</div>
+<pre>
 apple
 banana
 peach
@@ -206,16 +210,17 @@ apple
 banana
  cherry
 peach
-</pre></blockquote>
-Note that this example only has one element at the top of the tree (in
-this case that is the node containing "one") but it is possible to
-have an arbitary number of such elements (then the tree is more like a
-"bush"). Observe the way in which the two types of iterators work. The
-first block of output, obtained using the sibling_iterator, only
-displays the children directly below "two". The second block iterates
-over all children at any depth below "two". In the second output
-block, the <code>depth</code> member has been used to determine the
-distance of a given node to the root of the tree.  </div>
+</pre>
+<div class="text">Note that this example only has one element at the
+top of the tree (in this case that is the node containing "one") but
+it is possible to have an arbitary number of such elements (then the
+tree is more like a "bush"). Observe the way in which the two types of
+iterators work. The first block of output, obtained using the
+sibling_iterator, only displays the children directly below "two". The
+second block iterates over all children at any depth below "two". In
+the second output block, the <code>depth</code> member has been used
+to determine the distance of a given node to the root of the
+tree.  </div>
 
 <h2>Data structure</h2> 
 
@@ -223,7 +228,8 @@ distance of a given node to the root of the tree.  </div>
 below (see the documentation for more detailed information). 
 Each node contains a pointer to the first and last child element,
 and each child contains pointers to its previous and next sibling:
-<blockquote><small><pre>
+</div>
+<pre>
            first_child        first_child 
  root_node-+----------node--+----->-------node
            |           |    |               |   
@@ -244,7 +250,8 @@ and each child contains pointers to its previous and next sibling:
                        |    |               |
                        |    +-------------node
                        .
-                       .</pre></small></blockquote>
+                       .</pre>
+<div class="text">
 Iterators come in two types. The normal <code>iterator</code> iterates depth-first
 over all nodes. The beginning and end of the tree can be obtained by using the
 <code>begin()</code> and <code>end()</code> members. The other type of iterator
@@ -261,23 +268,21 @@ at the end).</div>
 <!-- Start of StatCounter Code -->
 <script type="text/javascript">
 var sc_project=4068217; 
-var sc_invisible=0; 
+var sc_invisible=1; 
 var sc_partition=50; 
 var sc_click_stat=1; 
 var sc_security="3f2419f9"; 
-var sc_text=1; 
 </script>
 
 <script type="text/javascript"
-		  src="http://www.statcounter.com/counter/counter.js"></script><noscript><div class="statcounter"><a title="free
-		  hit counter"
-		  href="http://www.statcounter.com/free_hit_counter.html"
-		  target="_blank"><img class="statcounter"
-		  src="http://c.statcounter.com/4068217/0/3f2419f9/0/" alt="free
-		  hit counter" ></a></div></noscript>
+src="http://www.statcounter.com/counter/counter_xhtml.js"></script><noscript><div
+class="statcounter"><a title="blogspot statistics"
+class="statcounter"
+href="http://www.statcounter.com/blogger/"><img
+class="statcounter"
+src="http://c.statcounter.com/4068217/0/3f2419f9/1/"
+alt="blogspot statistics" /></a></div></noscript>
 <!-- End of StatCounter Code -->
 
-   </div>
-</div>
 </body>
 </html>
