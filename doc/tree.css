@@ -16,15 +16,19 @@ div#titletxt {
 	 margin: 0 0 -160px 0;
 	 border-bottom: 2px solid white;
 }
+div#sidebar {
+	 float: right;
+	 width: 125px;	 
+}
 h2 {
-	 width: 700px;
+	 width: 650px;
 	 margin: 2ex 0 2ex 0;
     border-bottom: 1px solid #7070d0;
 }
 div.text {
 	 margin-left: 120px;
 	 margin-bottom: 2ex;
-	 width: 580px;
+	 width: 540px;
 }
 #title h1 {
     font-size: 30px;
