@@ -20,6 +20,12 @@ div#sidebar {
 	 float: right;
 	 width: 125px;	 
 }
+div#topad {
+	 margin: auto;
+	 margin-bottom: 10px;
+	 margin-top: 0;
+	 width: 728px;
+}
 h2 {
 	 width: 650px;
 	 margin: 2ex 0 2ex 0;
