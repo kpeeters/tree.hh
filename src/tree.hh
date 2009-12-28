@@ -2,15 +2,14 @@
 //	STL-like templated tree class.
 //
 // Copyright (C) 2001-2009 Kasper Peeters <kasper.peeters@aei.mpg.de>
-// Distributed under the GNU General Public License version 3,
-// (eventually to be changed to the Boost Software License).
+// Distributed under the GNU General Public License version 3.
 
 /** \mainpage tree.hh
     \author   Kasper Peeters
-    \version  2.65
-    \date     03-Apr-2009
-    \see      http://www.aei.mpg.de/~peekas/tree/
-    \see      http://www.aei.mpg.de/~peekas/tree/ChangeLog
+    \version  2.66
+    \date     28-dec-2009
+    \see      http://tree.phi-sci.com/
+    \see      http://tree.phi-sci.com/ChangeLog
 
    The tree.hh library for C++ provides an STL-like container class
    for n-ary trees, templated over the data stored at the
@@ -86,7 +85,7 @@ class tree {
 		tree(const iterator_base&);
 		tree(const tree<T, tree_node_allocator>&);
 		~tree();
-		void operator=(const tree<T, tree_node_allocator>&);
+		tree<T,tree_node_allocator>& operator=(const tree<T, tree_node_allocator>&);
 
       /// Base class for iterators, only pointers stored, no traversal logic.
 #ifdef __SGI_STL_PORT
@@ -519,9 +518,11 @@ void tree<T, tree_node_allocator>::head_initialise_()
    }
 
 template <class T, class tree_node_allocator>
-void tree<T, tree_node_allocator>::operator=(const tree<T, tree_node_allocator>& other)
+tree<T,tree_node_allocator>& tree<T, tree_node_allocator>::operator=(const tree<T, tree_node_allocator>& other)
 	{
-	copy_(other);
+	if(this != &other)
+		copy_(other);
+	return *this;
 	}
 
 template <class T, class tree_node_allocator>
