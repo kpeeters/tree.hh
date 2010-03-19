@@ -1,0 +1,369 @@
+2009-12-28  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Fixed the operator= return type and handled self-assignment
+	(thanks to Xinlin Cao for the fix).
+
+2009-05-05  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Released 2.65
+
+	* Added skip_children(bool), fixed post-increment/decrement
+	operators to not refer to 'n' anymore.
+
+2009-04-03  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Added a sibling member for quick access to the n-th sibling
+	(thanks to Adam Connell for sending the patch).
+
+2009-03-06  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Fixed an old bug in compare_nodes (pointed out to me in 2005 but
+	never fixed properly...)
+
+2008-08-28  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Released 2.62
+
+	* Changed the behaviour of max_depth() so that it returns -1 for
+	an empty tree, instead of bailing out with an error (strictly
+	speaking max_depth should be undefined...).
+
+2008-08-26  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Released 2.61
+
+	* Fixed a bug in max_depth() which would fail on trees with more
+	than one head node (thanks to Marc Noirot for pointing this out).
+
+2008-08-23  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Released 2.60
+
+	* Fixed several problems with fixed_depth iterators: iterating
+	beyond the top node now disabled and operator-- fixed.
+
+2008-07-25  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Made 'child()' static.
+
+2008-07-20  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Released 2.54
+
+	* Changed size() members to return size_t instead of unsigned int.
+
+	* Changed behaviour of operator++ for leaf_iterator so that it can
+	be used in situations where new leaves get added during iteration.
+	
+2008-06-30  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Released 2.52
+
+	* Made depth member function static so it can be used independent
+	of an actual tree, and added a version with two iterators to
+	measure depths relative to a different node.
+
+2008-02-28  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Released 2.51
+
+	* Added a top node to leaf_iterators, so that they can be
+	instructed to iterate only over the leaves of a given node.
+
+2007-10-19  Kasper Peeters  <kasper@pooh>
+
+	* Released 2.4.
+
+2007-10-18  Kasper Peeters  <kasper@pooh>
+
+	* Added max_depth() members.
+	
+	* Fixed a bug in begin_fixed() which would fail on 
+
+	       A
+              / \
+             B   C
+            /     \
+            D      E
+                  / \
+                  F G
+
+	  when asked for the first node at depth 3 from 'A' (since it
+	  failed to go back up the tree from 'D').
+
+2007-08-21  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Released 2.31.
+
+	* Added GPL version 3 licensing as an option.
+
+2007-01-19  Kasper Peeters  <kasper@pooh>
+
+	* Fixed a bug in "replace" which appeared when trying to replace a
+	head node (it tried to access the parent).
+
+2006-11-29  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Release 2.3.
+
+	Fixed a bug in number_of_siblings which only counted siblings in
+	one direction (thanks to Fanzhe Cui for pointing this out).
+
+2006-08-20  Kasper Peeters  <kasper@pooh>
+
+	* Released 2.2.
+
+	* Added operator== and operator!= for fixed_depth_iterator.
+
+2006-08-07  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Released 2.1.
+
+	* Added leaf iterators, code contributed by Peter Wienemann.
+
+	* Fixed a bug in is_valid (thanks to Antonio Morillas). 1.131.
+
+2006-07-19  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Fixed bugs in move_before and move_after which would show up
+	when the node was already in the right place. 1.130.
+
+2006-03-02  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Added the "wrap" member function.
+
+2006-03-01  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Added a simple queue-based breadth-first iterator.
+
+2006-01-31  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Fixed move_before to work when the target is a sibling_iterator
+	pointing to the end of a range of siblings.
+
+2005-11-20  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Added move_after, which for some mysterious reason was
+	missing. Thanks to Dennis Jones for pointing this out.
+
+	* Fixed a bug in operator++ for post_order iterators
+	(skip_children could remain set if no next sibling present).
+	Thanks to Ohad for pointing out the bug.
+
+2005-10-12  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Fixed a bug in the 'sort' member which takes a Comparator
+	function object (thanks to Robin Taylor for the patch).
+
+2005-09-14  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Doxygen documentation added, plus a new web page.
+
+2004-11-05  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Fixed a bug which shows up when inserting nodes at the top of
+	the tree (thanks to Matthias Bernt for pointing me to this one).
+
+2004-07-21  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Fixed kp::destructor -> destructor.
+
+	* Moved body of 'compare_nodes::operator()' into the class
+	declaration in order to satisfy buggy Borland compilers (and stop
+	regular email messages about this problem).
+
+	* Fixed a completely buggy number_of_siblings() (thanks to Caleb
+	Epstein for the patch).
+
+2004-02-04  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Released 1.106
+
+	* Fixed a bug in insert(sibling_iterator, const T&) (thanks to
+	Maxim Yegorushkin for the patch).
+
+2003-11-21  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Put some things in a namespace to avoid clashes with other
+	libraries.
+
+2003-10-13  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Released 1.102.
+
+	* Fixed return type of postincrement/decrement operators (thanks
+	to Yevhen Tymokhin for pointing this out).
+
+2003-09-18  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Fixes for standard compliance, as required to compile with 
+	gcc 3.4 and later.
+
+2003-08-12  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Added 'empty' member (patch by Michael Vogt).
+
+2003-08-01    <kasper@whiteroom2.localdomain>
+
+	* Released 1.95
+
+	* Fixed two bugs in sort (which were corrupting the tree); thanks
+	to Michael Vogt for informing me about the problem.
+
+2003-07-17    <kasper@whiteroom2.localdomain>
+
+	* Added a hack to enable compilation with STLport.
+
+2003-07-11    <kasper@whiteroom2.localdomain>
+
+	* Released 1.90
+
+	* Added postfix increment and decrement operators; thanks to
+	Claudio Andreatta for sending the patch.
+
+	* Fixed a bug in reparent(iter pos, iter from). Thanks to Claudio
+	Andreatta for fixing this.
+
+2003-06-25  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Many bug fixes for fixed depth iterators, thanks to Ruben
+	Niederhagen for pointing out several problems (a few still exist,
+	see the 'TODO' part of tree.hh).
+
+2003-04-17  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Released 1.85
+
+	* Corrected return type of operator++ and friends.
+
+	* Added preliminary support for 'fixed_depth_iterator' to iterate
+	over children at a given level. Not quite finished yet, sorry.
+
+2003-03-24  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Released 1.83
+
+	* Changed return type of 'child' member function to be a sibling
+	iterator instead of a reference to the actual node (sorry for the
+	incompatibility with previous versions). Change also propagated to
+	tree_msvc.hh.
+	
+2003-02-07    <kasper@whiteroom2.localdomain>
+
+	* Released 1.80
+
+	* Fixed another bug in sort (thanks to Tony Cook for fixing this
+	bug).
+
+2003-01-29  Kasper Peeters  <peekas@xeon25.aei-potsdam.mpg.de>
+
+	* Released 1.78.
+
+	* Fixed a bug in sort, which resulted in a corrupt tree (thanks to
+	Michael Vogt for fixing this bug).
+
+2003-01-07  Kasper Peeters  <peekas@xeon25.aei-potsdam.mpg.de>
+
+	* Released 1.75 and msvc version 1.72
+	
+	* Fixed a wrongly specialised 'insert' method for
+	sibling_iterators (thanks to Tony Cook for pointing this out).
+
+2002-11-15  Kasper Peeters  <peekas@xeon25.aei-potsdam.mpg.de>
+
+        * Released 1.72
+	
+	* Fixed a bug in 'index' when called on nodes at the top level of
+	the tree (thanks to David Zajic for the bug report). Be warned
+	that the top level is a bit special at the moment; the end
+	sibling_iterator is ill-defined for siblings there (to be fixed in
+	a future version).
+
+2002-10-31  Kasper Peeters  <peekas@sshserv.aei-potsdam.mpg.de>
+
+	* Released 1.70.
+
+	* Finished the merge algorithm, updated the documentation with
+	examples about its use, and added a test-case to the test_tree.cc
+	program.
+
+	* Fixed a bug in pre_order_iterator::operator--.
+
+2002-10-20  Kasper Peeters  <peekas@xeon24.aei-potsdam.mpg.de>
+
+	* Released 1.66.
+
+2002-10-15  Kasper Peeters  <kasper@whiteroom.nikhef.nl>
+
+	* Code for post_order_iterator implemented.
+
+2002-10-13  Kasper Peeters  <peekas@xeon24.aei-potsdam.mpg.de>
+
+	* Rewrote large parts of the code to allow for multiple iterator
+	types, such as pre_order_iterator (which was the previous iterator
+	type), post_order_iterator and so on. This required small changes
+	to the interface, the most visible one being
+
+	   - insert(iterator, iterator) for the insertion of a subtree
+	     is now called insert_subtree(iterator, iterator).
+
+	Apologies if this breaks your code.
+
+2002-10-11  Kasper Peeters  <peekas@xeon24.aei-potsdam.mpg.de>
+
+	* Removed '(void)' type declarations in favour of the C++ standard
+	empty brackets '()'.
+
+2002-10-10  Kasper Peeters  <peekas@xeon24.aei-potsdam.mpg.de>
+
+	* Added 'index' in response to a discussion on the Boost mailing
+	list. 
+
+2002-10-03  Kasper Peeters  <K.Peeters@damtp.cam.ac.uk>
+
+	* reparent(iterator,sibling_iterator,sibling_iterator) now accepts
+	an empty range, in which case it does nothing (request by Jos de
+	Laender).
+
+	* Fixed a bug in the iterator(sibling_iterator) constructor
+	(thanks to Jos de Laender for pointing this out).
+
+2002-09-04  Kasper Peeters  <K.Peeters@damtp.cam.ac.uk>
+
+	* Fixed a bug in insert_after (thanks to Carl Blanchette for the
+	patch).
+
+2002-08-29  Kasper Peeters  <K.Peeters@damtp.cam.ac.uk>
+
+	* The problem in test_tree of the previous item was actually do to
+	tree::end(iterator) returning the end of the tree, not the end of
+	the current sibling list. Fixed now, released 1.55.
+
+2002-08-26  Kasper Peeters  <K.Peeters@damtp.cam.ac.uk>
+
+	* Released 1.54.
+
+	* Printing a single-node tree in test_tree would result in a
+	segfault; more robust now (thanks to Yutaka Sato for the bug
+	report).
+	
+2002-05-07  Kasper Peeters  <K.Peeters@damtp.cam.ac.uk>
+
+	* Fixed a bug in "sort" which would remove duplicate nodes altogether.
+
+2002-03-24  Kasper Peeters  <kasper@whiteroom.nikhef.nl>
+
+	* Added "append_child" without child argument, to add empty child
+	node.
+
+2002-05-04  Kasper Peeters  <K.Peeters@damtp.cam.ac.uk>
+
+	* Released 1.45.
+
+	* Removed restriction of having only a single node at the top of
+	the tree (associated with this, the top nodes should now be inserted
+	with "insert", not with "append_child").
+
+	* Fixes for ISO compatibility (now works with gcc-3.1). Thanks to
+	Olivier Verdier.
+
