@@ -1,3 +1,10 @@
+2010-03-24  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Released 2.70
+
+	* Fixed handling of std::allocator to make it more likely to work
+	on non-GNU platforms.
+
 2009-12-28  Kasper Peeters  <kasper.peeters@aei.mpg.de>
 
 	* Fixed the operator= return type and handled self-assignment

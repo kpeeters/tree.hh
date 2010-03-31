@@ -6,8 +6,8 @@
 
 /** \mainpage tree.hh
     \author   Kasper Peeters
-    \version  2.66
-    \date     28-dec-2009
+    \version  2.70
+    \date     24-Mar-2010
     \see      http://tree.phi-sci.com/
     \see      http://tree.phi-sci.com/ChangeLog
 
@@ -31,40 +31,31 @@
 #include <queue>
 #include <algorithm>
 
-// HP-style construct/destroy have gone from the standard,
-// so here is a copy.
-
-namespace kp {
-
-template <class T1, class T2>
-void constructor(T1* p, T2& val) 
-	{
-	new ((void *) p) T1(val);
-	}
-
-template <class T1>
-void constructor(T1* p) 
-	{
-	new ((void *) p) T1;
-	}
-
-template <class T1>
-void destructor(T1* p)
-	{
-	p->~T1();
-	}
-
-}
 
 /// A node in the tree, combining links to other nodes as well as the actual data.
 template<class T>
 class tree_node_ { // size: 5*4=20 bytes (on 32 bit arch), can be reduced by 8.
 	public:
+		tree_node_();
+		tree_node_(const T&);
+
 		tree_node_<T> *parent;
 	   tree_node_<T> *first_child, *last_child;
 		tree_node_<T> *prev_sibling, *next_sibling;
 		T data;
 }; // __attribute__((packed));
+
+template<class T>
+tree_node_<T>::tree_node_()
+	: parent(0), first_child(0), last_child(0), prev_sibling(0), next_sibling(0)
+	{
+	}
+
+template<class T>
+tree_node_<T>::tree_node_(const T& val)
+	: parent(0), first_child(0), last_child(0), prev_sibling(0), next_sibling(0), data(val)
+	{
+	}
 
 template <class T, class tree_node_allocator = std::allocator<tree_node_<T> > >
 class tree {
@@ -494,6 +485,8 @@ template <class T, class tree_node_allocator>
 tree<T, tree_node_allocator>::~tree()
 	{
 	clear();
+	alloc_.destroy(head);
+	alloc_.destroy(feet);
 	alloc_.deallocate(head,1);
 	alloc_.deallocate(feet,1);
 	}
@@ -503,6 +496,8 @@ void tree<T, tree_node_allocator>::head_initialise_()
    { 
    head = alloc_.allocate(1,0); // MSVC does not have default second argument 
 	feet = alloc_.allocate(1,0);
+	alloc_.construct(head, tree_node_<T>());
+	alloc_.construct(feet, tree_node_<T>());
 
    head->parent=0;
    head->first_child=0;
@@ -574,7 +569,8 @@ void tree<T, tree_node_allocator>::erase_children(const iterator_base& it)
 		prev=cur;
 		cur=cur->next_sibling;
 		erase_children(pre_order_iterator(prev));
-		kp::destructor(&prev->data);
+//		kp::destructor(&prev->data);
+		alloc_.destroy(prev);
 		alloc_.deallocate(prev,1);
 		}
 	it.node->first_child=0;
@@ -605,7 +601,8 @@ iter tree<T, tree_node_allocator>::erase(iter it)
 		cur->next_sibling->prev_sibling=cur->prev_sibling;
 		}
 
-	kp::destructor(&cur->data);
+//	kp::destructor(&cur->data);
+	alloc_.destroy(cur);
    alloc_.deallocate(cur,1);
 	return ret;
 	}
@@ -831,7 +828,8 @@ iter tree<T, tree_node_allocator>::append_child(iter position)
 	assert(position.node);
 
 	tree_node *tmp=alloc_.allocate(1,0);
-	kp::constructor(&tmp->data);
+	alloc_.construct(tmp, tree_node_<T>());
+//	kp::constructor(&tmp->data);
 	tmp->first_child=0;
 	tmp->last_child=0;
 
@@ -856,7 +854,8 @@ iter tree<T, tree_node_allocator>::prepend_child(iter position)
 	assert(position.node);
 
 	tree_node *tmp=alloc_.allocate(1,0);
-	kp::constructor(&tmp->data);
+	alloc_.construct(tmp, tree_node_<T>());
+//	kp::constructor(&tmp->data);
 	tmp->first_child=0;
 	tmp->last_child=0;
 
@@ -885,7 +884,8 @@ iter tree<T, tree_node_allocator>::append_child(iter position, const T& x)
 	assert(position.node);
 
 	tree_node* tmp = alloc_.allocate(1,0);
-	kp::constructor(&tmp->data, x);
+	alloc_.construct(tmp, x);
+//	kp::constructor(&tmp->data, x);
 	tmp->first_child=0;
 	tmp->last_child=0;
 
@@ -910,7 +910,8 @@ iter tree<T, tree_node_allocator>::prepend_child(iter position, const T& x)
 	assert(position.node);
 
 	tree_node* tmp = alloc_.allocate(1,0);
-	kp::constructor(&tmp->data, x);
+	alloc_.construct(tmp, x);
+//	kp::constructor(&tmp->data, x);
 	tmp->first_child=0;
 	tmp->last_child=0;
 
@@ -997,7 +998,8 @@ iter tree<T, tree_node_allocator>::insert(iter position, const T& x)
 		                    // insert before the feet.
 		}
 	tree_node* tmp = alloc_.allocate(1,0);
-	kp::constructor(&tmp->data, x);
+	alloc_.construct(tmp, x);
+//	kp::constructor(&tmp->data, x);
 	tmp->first_child=0;
 	tmp->last_child=0;
 
@@ -1019,7 +1021,8 @@ template <class T, class tree_node_allocator>
 typename tree<T, tree_node_allocator>::sibling_iterator tree<T, tree_node_allocator>::insert(sibling_iterator position, const T& x)
 	{
 	tree_node* tmp = alloc_.allocate(1,0);
-	kp::constructor(&tmp->data, x);
+	alloc_.construct(tmp, x);
+//	kp::constructor(&tmp->data, x);
 	tmp->first_child=0;
 	tmp->last_child=0;
 
@@ -1049,7 +1052,8 @@ template <class iter>
 iter tree<T, tree_node_allocator>::insert_after(iter position, const T& x)
 	{
 	tree_node* tmp = alloc_.allocate(1,0);
-	kp::constructor(&tmp->data, x);
+	alloc_.construct(tmp, x);
+//	kp::constructor(&tmp->data, x);
 	tmp->first_child=0;
 	tmp->last_child=0;
 
@@ -1102,8 +1106,11 @@ template <class T, class tree_node_allocator>
 template <class iter>
 iter tree<T, tree_node_allocator>::replace(iter position, const T& x)
 	{
-	kp::destructor(&position.node->data);
-	kp::constructor(&position.node->data, x);
+//	kp::destructor(&position.node->data);
+//	kp::constructor(&position.node->data, x);
+	position.node->data=x;
+//	alloc_.destroy(position.node);
+//	alloc_.construct(position.node, x);
 	return position;
 	}
 
@@ -1121,7 +1128,8 @@ iter tree<T, tree_node_allocator>::replace(iter position, const iterator_base& f
 	erase_children(position);	
 //	std::cout << "no warning!" << std::endl;
 	tree_node* tmp = alloc_.allocate(1,0);
-	kp::constructor(&tmp->data, (*from));
+	alloc_.construct(tmp, (*from));
+//	kp::constructor(&tmp->data, (*from));
 	tmp->first_child=0;
 	tmp->last_child=0;
 	if(current_to->prev_sibling==0) {
@@ -1141,7 +1149,8 @@ iter tree<T, tree_node_allocator>::replace(iter position, const iterator_base& f
 		}
 	tmp->next_sibling=current_to->next_sibling;
 	tmp->parent=current_to->parent;
-	kp::destructor(&current_to->data);
+//	kp::destructor(&current_to->data);
+	alloc_.destroy(current_to);
 	alloc_.deallocate(current_to,1);
 	current_to=tmp;
 	
