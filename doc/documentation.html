@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+              "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="verify-v1"
+		content="LkU+jobePpu3F8I4GPuTiOjrTukmo1qpWT+dT6SeAfk=" />
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii" /> 
+<meta name="description" content="The tree.hh library provides C++
+		programmers with a container class to store arbitrary data in
+		n-ary tree form. It is compatible with the STL and its
+		algorithms wherever possible. Available under the terms of the GPL." />  
+<meta name="keywords" content="data structure, C++, programming, STL,
+		open source, container class" />
+<title>tree.hh: an STL-like C++ tree class, documentation</title>
+<link rel="stylesheet" type="text/css" href="tree.css" /> 
+</head>
+<body>
+  <div id="container">
+	 <div id="title">
+		<div id="share">
+<!-- AddThis Button BEGIN -->
+<a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;username=kpeeters"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=kpeeters"></script>
+<!-- AddThis Button END -->
+		</div>
+		<div id="filler">
+		  <img id="treeimg" src="tree2.png" alt="[background image]"/>
+		</div>
+      <div id="titletxt">
+        <h1>tree.hh: an STL-like C++ tree class</h1>
+        <h2 class="author">
+          <a href="http://www.aei.mpg.de/~peekas/">Kasper Peeters</a>, kasper.peeters (at) gmail.com
+        </h2>
+      </div>
+    </div>
+	 
+	 <ul id="menubar">
+		<li><a href="index.html">Overview</a></li>
+		<li><a href="download.html">Download</a></li>
+		<li><a href="documentation.html">Documentation</a></li>
+		<li><a href="projects.html">Projects using tree.hh</a></li>
+	 </ul>
+
+	 <div id="linkbar">
+		<script type="text/javascript"><!--
+													  google_ad_client = "pub-9577963716105989";
+													  /* tree linkbar */
+													  google_ad_slot = "0194609917";
+													  google_ad_width = 728;
+													  google_ad_height = 15;
+													  //-->
+		</script>
+		<script type="text/javascript"
+				  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+	 </div>
+
+	 <div id="main">
+	 
+		<div id="sidebar">
+		  <script type="text/javascript"><!--
+														 google_ad_client = "pub-9577963716105989";
+														 /* tree.hh vertical ads */
+														 google_ad_slot = "3744417434";
+														 google_ad_width = 120;
+														 google_ad_height = 600;
+														 //-->
+		  </script>
+		  <script type="text/javascript"
+					 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		  </script>
+		</div>
+
+		<h2>Data structure overview</h2> 
+		
+		<div class="text">The data structure of the <code>tree</code> class is depicted
+		  below (see the documentation for more detailed information). 
+		  Each node contains a pointer to the first and last child element,
+		  and each child contains pointers to its previous and next sibling:
+		  <img class="structure" src="structure.png" alt="[structure
+		  diagram]" />
+		</div>
+
+		<div class="text">
+		  Iterators come in various types. The normal <code>iterator</code> iterates depth-first
+		  over all nodes. The beginning and end of the tree can be obtained by using the
+		  <code>begin()</code> and <code>end()</code> members. The other type of iterator
+		  only iterates over the nodes at one given depth (ie. over all siblings). One
+		  typically uses these iterators to iterate over all children of a node, in which
+		  case the [begin,end) range can be obtained by calling <code>begin(iterator)</code>
+		  and <code>end(iterator)</code>.</div>
+		
+		<div class="text">Iterators can be converted from one type to the other; this includes the `end' 
+		  iterators (all intervals are as usual closed at the beginning and open
+		  at the end).</div>
+
+		<h2>Sample program</h2>
+
+		<div class="text">
+		  Here is a small sample program to illustrate
+		  how <code>tree.hh</code> is used in practise.
+
+		<div class="code">
+		  <pre>#include &lt;algorithm&gt;
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+#include "tree.hh"
+
+using namespace std;
+
+int main(int, char **)
+   {
+   tree&lt;string&gt; tr;
+   tree&lt;string&gt;::iterator top, one, two, loc, banana;
+   
+   top=tr.begin();
+   one=tr.insert(top, "one");
+   two=tr.append_child(one, "two");
+   tr.append_child(two, "apple");
+   banana=tr.append_child(two, "banana");
+   tr.append_child(banana,"cherry");
+   tr.append_child(two, "peach");
+   tr.append_child(one,"three");
+   
+   loc=find(tr.begin(), tr.end(), "two");
+   if(loc!=tr.end()) {
+   tree&lt;string&gt;::sibling_iterator sib=tr.begin(loc);
+   while(sib!=tr.end(loc)) {
+     cout &lt;&lt; (*sib) &lt;&lt; endl;
+     ++sib;
+     }
+   cout &lt;&lt; endl;
+   tree&lt;string&gt;::iterator sib2=tr.begin(loc);
+   tree&lt;string&gt;::iterator end2=tr.end(loc);
+   while(sib2!=end2) {
+     for(int i=0; i&lt;tr.depth(sib2)-2; ++i) 
+        cout &lt;&lt; " ";
+     cout &lt;&lt; (*sib2) &lt;&lt; endl;
+     ++sib2;
+     }
+   }
+}</pre>
+		</div>
+		The output of this program is
+		<div class="code">
+		  <pre>apple
+banana
+peach
+
+apple
+banana
+ cherry
+peach</pre>
+		</div>
+		Note that this example only has one element at the
+		top of the tree (in this case that is the node containing "one") but
+		it is possible to have an arbitary number of such elements (then the
+		tree is more like a "bush"). Observe the way in which the two types of
+		iterators work. The first block of output, obtained using the
+		sibling_iterator, only displays the children directly below "two". The
+		second block iterates over all children at any depth below "two". In
+		the second output block, the <code>depth</code> member has been used
+		to determine the distance of a given node to the root of the
+		tree.  
+		</div>
+
+		<h2>API documentation</h2>
+
+		<div class="text">
+		  Documentation is available in the form of
+		  a <a href="tree.pdf">pdf</a> file. This file is also available
+		  in the tarball as a LaTeX file. Further information can be
+		  obtained by reading the test program (included in the
+		  distribution). Also look at the <a href="#example">simple
+		  example</a> below.
+		</div>
+		
+		<div class="text">
+		  The most complete documentation of the interface is always
+		  available in the <a href="doxygen/html/index.html">doxygen
+			 generated documentation</a>.
+		</div>	 
+	 </div>
+
+	 <div id="flush"></div>
+
+	 <p>
+		<a href="http://validator.w3.org/check?uri=referer">
+		  <img
+			  src="http://www.w3.org/Icons/valid-xhtml10"
+			  alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
+	 </p>
+
+	 <!-- Start of StatCounter Code -->
+	 <script type="text/javascript">
+		var sc_project=4068217; 
+		var sc_invisible=1; 
+		var sc_partition=50; 
+		var sc_click_stat=1; 
+		var sc_security="3f2419f9"; 
+	 </script>
+	 
+	 <script type="text/javascript"
+				src="http://www.statcounter.com/counter/counter_xhtml.js"></script>
+	 <noscript>
+		<div class="statcounter">
+		  <a title="blogspot statistics"
+			  class="statcounter"
+			  href="http://www.statcounter.com/blogger/">
+			 <img
+				 class="statcounter"
+				 src="http://c.statcounter.com/4068217/0/3f2419f9/1/"
+				 alt="blogspot statistics" /></a>
+		</div>
+	 </noscript>
+	 <!-- End of StatCounter Code -->
+
+  </div>
+
+</body>
+</html>

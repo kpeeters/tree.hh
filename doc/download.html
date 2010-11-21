@@ -11,22 +11,22 @@
 		algorithms wherever possible. Available under the terms of the GPL." />  
 <meta name="keywords" content="data structure, C++, programming, STL,
 		open source, container class" />
-<title>tree.hh: an STL-like C++ tree class</title>
+<title>tree.hh: an STL-like C++ tree class, download</title>
 <link rel="stylesheet" type="text/css" href="tree.css" /> 
 </head>
 <body>
   <div id="container">
 	 <div id="title">
-		  <div id="share">
+		<div id="share">
 <!-- AddThis Button BEGIN -->
 <a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;username=kpeeters"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=kpeeters"></script>
 <!-- AddThis Button END -->
-		  </div>
+		</div>
 		<div id="filler">
 		  <img id="treeimg" src="tree2.png" alt="[background image]"/>
 		</div>
       <div id="titletxt">
-        <h1>tree.hh:&nbsp;an&nbsp;STL-like&nbsp;C++&nbsp;tree&nbsp;class</h1>
+        <h1>tree.hh: an STL-like C++ tree class</h1>
         <h2 class="author">
           <a href="http://www.aei.mpg.de/~peekas/">Kasper Peeters</a>, kasper.peeters (at) gmail.com
         </h2>
@@ -70,26 +70,38 @@
 		  </script>
 		</div>
 
-		<h2>Overview</h2> 
+		<h2>Download</h2> 
 		
+		<div class="text">Everything (the header file, examples, documentation
+		  and all other things referred to on this page) is contained in the
+		  tarball</div>
+		<div class="filename">
+		  <a href="tree-2.65.tar.gz">tree-2.65.tar.gz</a>
+		</div>
 		<div class="text">
-		  The <code>tree.hh</code> library for C++ provides an STL-like container class
-		  for <i>n</i>-ary trees, templated over the data stored at the nodes.  Various
-		  types of iterators are provided (post-order, pre-order, and
-		  others). Where possible the access methods are compatible with the STL
-		  or alternative algorithms are available. The library is available
-		  under the terms of the GNU General Public License version 2 or
-		  3 (see below).</div>
-		
-		<div class="text">Documentation is available in the form of
-		  a <a href="tree.pdf">pdf</a> file. See
-		  the <a href="documentation.html">documentation page</a> for
-		  more details and sample programs.
+		  Feel free to copy the header <a href="tree.hh">tree.hh</a>
+		  (which is all you need code-wise) into your own source
+		  directory as long as you respect the license (see above).
+		</div>
+
+		<div class="text">
+		  The list of changes can be found in the <a href="ChangeLog">ChangeLog</a>.
+		</div>
+
+		<div class="text">
+		  There is a small utility
+		  library <a href="tree_util.hh">tree_util.hh</a> originally
+		  written by Linda Buisman. This library contains a number of
+		  functions to output a tree as text, to aid in debugging your
+		  project.
 		</div>
 		
-		<div class="text">The <code>tree.hh</code> library is meant for generic <i>n</i>-ary
-		  trees. For binary trees, AVL trees, quad trees and other data
-		  structures, you may want to look elsewhere. </div>
+		<div class="text">The current version works with GNU gcc 3.x and
+		  higher, Borland&nbsp;C++&nbsp;builder and Microsoft Visual C++ 7.1 and
+		  higher (I no longer support older versions of Visual C++). It is
+		  compatible with STLport (though older versions may not work
+		  correctly, best to upgrade to something fairly recent).
+		</div>
 
 		<div class="text">The library is available for free, but if it
 		helps you a lot, why not consider a small donation?
@@ -112,47 +124,18 @@
 		  Your contribution is greatly appreciated!
 		</div>
 
+		
+		<h2>Installation</h2>
+
 		<div class="text">
-		  I have considered this class for inclusion in Boost. However,
-		  there are many ways to implement a tree container, and there
-		  is no good way to simultaneously satisfy everyone who would
-		  use it. See the discussion on the Boost mailing list in
-		  <a href="http://lists.boost.org/Archives/boost/2002/10/37383.php">2002</a>
-		  and <a href="http://lists.boost.org/Archives/boost/2009/07/153719.php">2009</a>.
+		  No installation is required as the tree.hh library is
+		  contained in the single header file tree.hh. Just copy it into
+		  your source directory (and upgrade it from the master site
+		  when a new version becomes available). 
 		</div>
 
-		<h2>License</h2> 
-		
-		<div class="text">In principle, the <code>tree.hh</code> code is
-		  available under the terms of the GNU General Public
-		  License <a href="http://www.gnu.org/licenses/old-licenses/gpl-2.0.html">2</a>
-		  or <a href="http://www.gnu.org/copyleft/gpl.html">3</a>. However,
-		  if you would like to use <code>tree.hh</code> under different
-		  conditions, contact me and we will work something out.</div>
-		
-		<div class="license">
-		  This program is free software: you can redistribute it and/or modify
-		  it under the terms of the GNU General Public License as published by
-		  the Free Software Foundation, either version 2 of the License, or
-		  (at your option) any later version.
-		  
-		  This program is distributed in the hope that it will be useful,
-		  but WITHOUT ANY WARRANTY; without even the implied warranty of
-		  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-		  GNU General Public License for more details.
-		  
-		  You should have received a copy of the GNU General Public
-		  License along with this program.  If not,
-		  see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.
-		</div>
-
-		<div class="text">If you use <code>tree.hh</code>,
-		  please satisfy my curiosity and write me a small email with
-		  a bit of explanation of your software and the role of my tree 
-		  class in it.</div>
-		
 	 </div>
-
+	 
 	 <div id="flush"></div>
 
 	 <p>
@@ -161,7 +144,7 @@
 			  src="http://www.w3.org/Icons/valid-xhtml10"
 			  alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
 	 </p>
-	 
+
 	 <!-- Start of StatCounter Code -->
 	 <script type="text/javascript">
 		var sc_project=4068217; 
