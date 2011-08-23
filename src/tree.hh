@@ -11,7 +11,7 @@
 
 /** \mainpage tree.hh
     \author   Kasper Peeters
-    \version  2.8
+    \version  2.81
     \date     23-Aug-2011
     \see      http://tree.phi-sci.com/
     \see      http://tree.phi-sci.com/ChangeLog
@@ -386,6 +386,9 @@ class tree {
 									  const iterator_base& end) const;
 		/// Determine whether the iterator is an 'end' iterator and thus not actually pointing to a node.
 		bool     is_valid(const iterator_base&) const;
+		/// Find the lowest common ancestor of two nodes, that is, the deepest node such that
+		/// both nodes are descendants of it.
+		iterator lowest_common_ancestor(const iterator_base&, const iterator_base &) const;
 
 		/// Determine the index of a node in the range of siblings to which it belongs.
 		unsigned int index(sibling_iterator it) const;
@@ -393,6 +396,10 @@ class tree {
 		static sibling_iterator child(const iterator_base& position, unsigned int);
 		/// Return iterator to the sibling indicated by index
 		sibling_iterator sibling(const iterator_base& position, unsigned int);  				
+		
+		/// For debugging only: verify internal consistency by inspecting all pointers in the tree
+		/// (which will also trigger a valgrind error in case something got corrupted).
+		void debug_verify_consistency() const;
 		
 		/// Comparator class for iterators (compares pointer values; why doesn't this work automatically?)
 		class iterator_base_less {
@@ -1441,9 +1448,9 @@ template <typename iter> iter tree<T, tree_node_allocator>::move_ontop(iter targ
 
 	if(dst==src) return source;
 
-	if(dst==src->prev_sibling) {
-HERE
-		}
+//	if(dst==src->prev_sibling) {
+//
+//		}
 
 	// remember connection points
 	tree_node *b_prev_sibling=dst->prev_sibling;
@@ -1850,6 +1857,29 @@ bool tree<T, tree_node_allocator>::is_valid(const iterator_base& it) const
 	}
 
 template <class T, class tree_node_allocator>
+typename tree<T, tree_node_allocator>::iterator tree<T, tree_node_allocator>::lowest_common_ancestor(
+	const iterator_base& one, const iterator_base& two) const
+	{
+	std::set<iterator, iterator_base_less> parents;
+
+	// Walk up from 'one' storing all parents.
+	iterator walk=one;
+	do {
+		walk=parent(walk);
+		parents.insert(walk);
+		} while( is_valid(parent(walk)) );
+
+	// Walk up from 'two' until we encounter a node in parents.
+	walk=two;
+	do {
+		walk=parent(walk);
+		if(parents.find(walk) != parents.end()) break;
+		} while( is_valid(parent(walk)) );
+
+	return walk;
+	}
+
+template <class T, class tree_node_allocator>
 unsigned int tree<T, tree_node_allocator>::index(sibling_iterator it) const
 	{
 	unsigned int ind=0;
@@ -1890,6 +1920,24 @@ typename tree<T, tree_node_allocator>::sibling_iterator tree<T, tree_node_alloca
    return tmp;
    }
  
+template <class T, class tree_node_allocator>
+void tree<T, tree_node_allocator>::debug_verify_consistency() const
+	{
+	iterator it=begin();
+	while(it!=end()) {
+		if(it.node->parent!=0) {
+			if(it.node->prev_sibling==0) 
+				assert(it.node->parent->first_child==it.node);
+			else 
+				assert(it.node->prev_sibling->next_sibling==it.node);
+			if(it.node->next_sibling==0) 
+				assert(it.node->parent->last_child==it.node);
+			else
+				assert(it.node->next_sibling->prev_sibling==it.node);
+			}
+		++it;
+		}
+	}
 
 template <class T, class tree_node_allocator>
 typename tree<T, tree_node_allocator>::sibling_iterator tree<T, tree_node_allocator>::child(const iterator_base& it, unsigned int num) 
