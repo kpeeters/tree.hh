@@ -1,5 +1,5 @@
 
-RELEASE=2.65
+RELEASE=2.8
 HTML=${HOME}/public_html/
 
 .PHONY: doc tarball

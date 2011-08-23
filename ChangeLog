@@ -1,3 +1,14 @@
+2011-08-23  Kasper Peeters  <kasper@phi-sci.com>
+
+	* Released 2.8
+
+	* License updated.
+
+2010-12-24  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Added a number of asserts to trip when passing invalid iterators
+	to append_child/prepend_child members.
+
 2010-03-24  Kasper Peeters  <kasper.peeters@aei.mpg.de>
 
 	* Released 2.70

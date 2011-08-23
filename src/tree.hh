@@ -1,13 +1,18 @@
 
 //	STL-like templated tree class.
 //
-// Copyright (C) 2001-2009 Kasper Peeters <kasper.peeters@aei.mpg.de>
+// Copyright (C) 2001-2011 Kasper Peeters <kasper@phi-sci.com>
 // Distributed under the GNU General Public License version 3.
+//
+// When used together with the htmlcxx library to create 
+// HTML::Node template instances, the GNU Lesser General Public 
+// version 2 applies. Special permission to use tree.hh under
+// the LGPL for other projects can be requested from the author.
 
 /** \mainpage tree.hh
     \author   Kasper Peeters
-    \version  2.70
-    \date     24-Mar-2010
+    \version  2.8
+    \date     23-Aug-2011
     \see      http://tree.phi-sci.com/
     \see      http://tree.phi-sci.com/ChangeLog
 
@@ -30,6 +35,7 @@
 #include <set>
 #include <queue>
 #include <algorithm>
+#include <cstddef>
 
 
 /// A node in the tree, combining links to other nodes as well as the actual data.
@@ -825,6 +831,7 @@ template <typename iter>
 iter tree<T, tree_node_allocator>::append_child(iter position)
  	{
 	assert(position.node!=head);
+	assert(position.node!=feet);
 	assert(position.node);
 
 	tree_node *tmp=alloc_.allocate(1,0);
@@ -851,6 +858,7 @@ template <typename iter>
 iter tree<T, tree_node_allocator>::prepend_child(iter position)
  	{
 	assert(position.node!=head);
+	assert(position.node!=feet);
 	assert(position.node);
 
 	tree_node *tmp=alloc_.allocate(1,0);
@@ -881,6 +889,7 @@ iter tree<T, tree_node_allocator>::append_child(iter position, const T& x)
 	// using 'insert'. See the documentation for further information, and sorry about
 	// the API change.
 	assert(position.node!=head);
+	assert(position.node!=feet);
 	assert(position.node);
 
 	tree_node* tmp = alloc_.allocate(1,0);
@@ -907,6 +916,7 @@ template <class iter>
 iter tree<T, tree_node_allocator>::prepend_child(iter position, const T& x)
 	{
 	assert(position.node!=head);
+	assert(position.node!=feet);
 	assert(position.node);
 
 	tree_node* tmp = alloc_.allocate(1,0);
@@ -933,6 +943,7 @@ template <class iter>
 iter tree<T, tree_node_allocator>::append_child(iter position, iter other)
 	{
 	assert(position.node!=head);
+	assert(position.node!=feet);
 	assert(position.node);
 
 	sibling_iterator aargh=append_child(position, value_type());
@@ -944,6 +955,7 @@ template <class iter>
 iter tree<T, tree_node_allocator>::prepend_child(iter position, iter other)
 	{
 	assert(position.node!=head);
+	assert(position.node!=feet);
 	assert(position.node);
 
 	sibling_iterator aargh=prepend_child(position, value_type());
@@ -955,6 +967,7 @@ template <class iter>
 iter tree<T, tree_node_allocator>::append_children(iter position, sibling_iterator from, sibling_iterator to)
 	{
 	assert(position.node!=head);
+	assert(position.node!=feet);
 	assert(position.node);
 
 	iter ret=from;
@@ -971,6 +984,7 @@ template <class iter>
 iter tree<T, tree_node_allocator>::prepend_children(iter position, sibling_iterator from, sibling_iterator to)
 	{
 	assert(position.node!=head);
+	assert(position.node!=feet);
 	assert(position.node);
 
 	iter ret=from;
@@ -1426,6 +1440,10 @@ template <typename iter> iter tree<T, tree_node_allocator>::move_ontop(iter targ
 	assert(src);
 
 	if(dst==src) return source;
+
+	if(dst==src->prev_sibling) {
+HERE
+		}
 
 	// remember connection points
 	tree_node *b_prev_sibling=dst->prev_sibling;

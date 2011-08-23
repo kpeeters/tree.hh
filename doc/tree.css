@@ -112,6 +112,11 @@ div#share {
 	 right: 50px;
 	 top: 36px;
 }
+div#plusone {
+	 position: absolute;
+	 left: 50px;
+	 top: 36px;
+}
 
 #main h2 {
 	 margin-top: 2ex;
