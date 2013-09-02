@@ -1,3 +1,9 @@
+2013-09-02  Kasper Peeters  <kasper.peeters@aei.mpg.de>
+
+	* Released 2.9
+
+	* Added 'pre_order_iterator::next_skip_children()'.
+
 2011-08-23  Kasper Peeters  <kasper.peeters@aei.mpg.de>
 
 	* Brown paper bag release 2.81.

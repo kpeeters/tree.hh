@@ -11,8 +11,8 @@
 
 /** \mainpage tree.hh
     \author   Kasper Peeters
-    \version  2.81
-    \date     23-Aug-2011
+    \version  2.9
+    \date     2-Sep-2013
     \see      http://tree.phi-sci.com/
     \see      http://tree.phi-sci.com/ChangeLog
 
@@ -134,6 +134,8 @@ class tree {
 				pre_order_iterator   operator--(int);
 				pre_order_iterator&  operator+=(unsigned int);
 				pre_order_iterator&  operator-=(unsigned int);
+
+				pre_order_iterator&  next_skip_children();
 		};
 
 		/// Depth-first iterator, first accessing the children, then the node itself.
@@ -2158,6 +2160,14 @@ typename tree<T, tree_node_allocator>::pre_order_iterator tree<T, tree_node_allo
 	pre_order_iterator copy = *this;
 	++(*this);
 	return copy;
+	}
+
+template <class T, class tree_node_allocator>
+typename tree<T, tree_node_allocator>::pre_order_iterator& tree<T, tree_node_allocator>::pre_order_iterator::next_skip_children() 
+   {
+	(*this).skip_children();
+	(*this)++;
+	return *this;
 	}
 
 template <class T, class tree_node_allocator>
