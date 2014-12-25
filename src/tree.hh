@@ -1,18 +1,16 @@
 
 //	STL-like templated tree class.
 //
-// Copyright (C) 2001-2011 Kasper Peeters <kasper@phi-sci.com>
+// Copyright (C) 2001-2014 Kasper Peeters <kasper@phi-sci.com>
 // Distributed under the GNU General Public License version 3.
 //
-// When used together with the htmlcxx library to create 
-// HTML::Node template instances, the GNU Lesser General Public 
-// version 2 applies. Special permission to use tree.hh under
-// the LGPL for other projects can be requested from the author.
+// Special permission to use tree.hh under the conditions of a 
+// different license can be requested from the author.
 
 /** \mainpage tree.hh
     \author   Kasper Peeters
-    \version  2.9
-    \date     2-Sep-2013
+    \version  3.0
+    \date     25-Dec-2014
     \see      http://tree.phi-sci.com/
     \see      http://tree.phi-sci.com/ChangeLog
 
@@ -77,12 +75,14 @@ class tree {
 		class sibling_iterator;
       class leaf_iterator;
 
-		tree();
-		tree(const T&);
+		tree();                                         // empty constructor
+		tree(const T&);                                 // constructor setting given element as head
 		tree(const iterator_base&);
-		tree(const tree<T, tree_node_allocator>&);
+		tree(const tree<T, tree_node_allocator>&);      // copy constructor
+		tree(tree<T, tree_node_allocator>&&);           // move constructor
 		~tree();
-		tree<T,tree_node_allocator>& operator=(const tree<T, tree_node_allocator>&);
+		tree<T,tree_node_allocator>& operator=(const tree<T, tree_node_allocator>&);   // copy assignment
+		tree<T,tree_node_allocator>& operator=(tree<T, tree_node_allocator>&&);        // move assignment
 
       /// Base class for iterators, only pointers stored, no traversal logic.
 #ifdef __SGI_STL_PORT
@@ -277,9 +277,9 @@ class tree {
 		/// Return iterator to the parent of a node.
 		template<typename	iter> static iter parent(iter);
 		/// Return iterator to the previous sibling of a node.
-		template<typename iter> iter previous_sibling(iter) const;
+		template<typename iter> static iter previous_sibling(iter);
 		/// Return iterator to the next sibling of a node.
-		template<typename iter> iter next_sibling(iter) const;
+		template<typename iter> static iter next_sibling(iter);
 		/// Return iterator to the next node at a given depth.
 		template<typename iter> iter next_at_same_depth(iter) const;
 
@@ -341,6 +341,14 @@ class tree {
       sibling_iterator move_before(sibling_iterator target, sibling_iterator source);
 		/// Move 'source' node (plus its children) to become the node at 'target' (erasing the node at 'target').
 		template<typename iter> iter move_ontop(iter target, iter source);
+
+		/// Extract the subtree starting at the indicated node, removing it from the original tree.
+		tree     move_out(iterator);
+		/// Inverse of take_out: inserts the given tree as previous sibling of indicated node by a 
+		/// move operation, that is, the given tree becomes empty. Returns iterator to the top node.
+		iterator move_in(sibling_iterator, tree&);
+		/// As above, but now make the tree a child of the indicated node.
+    	iterator move_in_below(iterator, tree&);
 
 		/// Merge with other tree, creating new branches and leaves only if they are not already present.
 		void     merge(sibling_iterator, sibling_iterator, sibling_iterator, sibling_iterator, 
@@ -489,6 +497,18 @@ tree<T, tree_node_allocator>::tree(const T& x)
 	}
 
 template <class T, class tree_node_allocator>
+tree<T, tree_node_allocator>::tree(tree<T, tree_node_allocator>&& x) 
+	{
+	head_initialise_();
+	head->next_sibling=x.head->next_sibling;
+	feet->prev_sibling=x.head->prev_sibling;
+	x.head->next_sibling->prev_sibling=head;
+	x.feet->prev_sibling->next_sibling=feet;
+	x.head->next_sibling=x.feet;
+	x.feet->prev_sibling=x.head;
+	}
+
+template <class T, class tree_node_allocator>
 tree<T, tree_node_allocator>::tree(const iterator_base& other)
 	{
 	head_initialise_();
@@ -532,6 +552,20 @@ tree<T,tree_node_allocator>& tree<T, tree_node_allocator>::operator=(const tree<
 	{
 	if(this != &other)
 		copy_(other);
+	return *this;
+	}
+
+template <class T, class tree_node_allocator>
+tree<T,tree_node_allocator>& tree<T, tree_node_allocator>::operator=(tree<T, tree_node_allocator>&& x)
+	{
+	if(this != &x) {
+		head->next_sibling=x.head->next_sibling;
+		feet->prev_sibling=x.head->prev_sibling;
+		x.head->next_sibling->prev_sibling=head;
+		x.feet->prev_sibling->next_sibling=feet;
+		x.head->next_sibling=x.feet;
+		x.feet->prev_sibling=x.head;
+		}
 	return *this;
 	}
 
@@ -772,7 +806,7 @@ iter tree<T, tree_node_allocator>::parent(iter position)
 
 template <class T, class tree_node_allocator>
 template <typename iter>
-iter tree<T, tree_node_allocator>::previous_sibling(iter position) const
+iter tree<T, tree_node_allocator>::previous_sibling(iter position) 
 	{
 	assert(position.node!=0);
 	iter ret(position);
@@ -782,7 +816,7 @@ iter tree<T, tree_node_allocator>::previous_sibling(iter position) const
 
 template <class T, class tree_node_allocator>
 template <typename iter>
-iter tree<T, tree_node_allocator>::next_sibling(iter position) const
+iter tree<T, tree_node_allocator>::next_sibling(iter position) 
 	{
 	assert(position.node!=0);
 	iter ret(position);

@@ -365,14 +365,8 @@ int main(int argc, char **argv)
 			 ++li;
 			 }
 
-//		  tree<std::string> testfixed;
-//		  testfixed.insert(testfixed.begin(), "one");
-//		  testfixed.insert(testfixed.begin(), "two");
-//		  testfixed.insert(testfixed.begin(), "three");
-//		  tree<std::string>::fixed_depth_iterator fit=testfixed.begin();
-//		  while(testfixed.is_valid(fit)) {
-//			  std::cout << *fit << std::endl;
-//			  ++fit;
-//			  }
+//		test_move_constructor();
+
 		}
 	}
+

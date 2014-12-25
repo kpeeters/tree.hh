@@ -1,3 +1,9 @@
+2014-12-25  Kasper Peeters  <kasper.peeters@phi-sci.com>
+
+	* Released 3.0
+
+	* Added move constructor and move_out, move_in, move_in_below.
+
 2013-09-02  Kasper Peeters  <kasper.peeters@aei.mpg.de>
 
 	* Released 2.9
