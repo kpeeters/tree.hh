@@ -343,12 +343,12 @@ class tree {
 		template<typename iter> iter move_ontop(iter target, iter source);
 
 		/// Extract the subtree starting at the indicated node, removing it from the original tree.
-		tree     move_out(iterator);
+		tree                         move_out(iterator);
 		/// Inverse of take_out: inserts the given tree as previous sibling of indicated node by a 
 		/// move operation, that is, the given tree becomes empty. Returns iterator to the top node.
-		iterator move_in(sibling_iterator, tree&);
+		template<typename iter> iter move_in(iter, tree&);
 		/// As above, but now make the tree a child of the indicated node.
-    	iterator move_in_below(iterator, tree&);
+		template<typename iter> iter move_in_below(iter, tree&);
 
 		/// Merge with other tree, creating new branches and leaves only if they are not already present.
 		void     merge(sibling_iterator, sibling_iterator, sibling_iterator, sibling_iterator, 
@@ -1512,6 +1512,38 @@ template <typename iter> iter tree<T, tree_node_allocator>::move_ontop(iter targ
 	src->parent=b_parent;
 	return src;
 	}
+
+
+template <class T, class tree_node_allocator>
+tree<T, tree_node_allocator> tree<T, tree_node_allocator>::move_out(iterator source)
+	{
+	tree ret;
+
+	// Move source node into the 'ret' tree.
+	ret.head->next_sibling = source.node;
+	ret.feet->prev_sibling = source.node;
+	source.node->parent=0;
+
+	// Close the links in the current tree.
+	if(source.node->prev_sibling!=0) 
+		source.node->prev_sibling->next_sibling = source.node->next_sibling;
+
+	if(source.node->next_sibling!=0) 
+		source.node->next_sibling->prev_sibling = source.node->prev_sibling;
+
+	// Fix source prev/next links.
+	source.node->prev_sibling = ret.head;
+	source.node->next_sibling = ret.feet;
+
+	return ret; // A good compiler will move this, not copy.
+	}
+
+template <class T, class tree_node_allocator>
+template<typename iter> iter tree<T, tree_node_allocator>::move_in(iter loc, tree& other)
+	{
+	
+	}
+
 
 template <class T, class tree_node_allocator>
 void tree<T, tree_node_allocator>::merge(sibling_iterator to1,   sibling_iterator to2,

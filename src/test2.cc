@@ -21,6 +21,19 @@ tree<std::string> test_move_constructor()
 	return ctree;
 	}
 
+tree<std::string> test_move_out()
+	{
+	tree<std::string> mtree;
+	tree<std::string>::iterator it = mtree.set_head("top");
+	mtree.append_child(it, "one");
+	auto it2 = mtree.append_child(it, "two");
+	mtree.append_child(it, "three");
+	mtree.append_child(it2, "four");
+	mtree.append_child(it2, "five");
+
+	return mtree.move_out(it2);
+	}
+
 
 int main(int argc, char **argv)
 	{
@@ -28,4 +41,10 @@ int main(int argc, char **argv)
 
 	std::cout << "res:" << std::endl;
 	kptree::print_tree_bracketed(res);
+
+	tree<std::string> res2 = test_move_out();
+	std::cout << "\nres2:" << std::endl;
+	kptree::print_tree_bracketed(res2);
+
+	std::cout << std::endl;
 	}
