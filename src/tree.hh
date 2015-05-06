@@ -9,8 +9,8 @@
 
 /** \mainpage tree.hh
     \author   Kasper Peeters
-    \version  3.0
-    \date     25-Dec-2014
+    \version  3.1
+    \date     06-May-2015
     \see      http://tree.phi-sci.com/
     \see      http://tree.phi-sci.com/ChangeLog
 
@@ -1776,6 +1776,8 @@ bool tree<T, tree_node_allocator>::equal_subtree(const iter& one_, const iter& t
 template <class T, class tree_node_allocator>
 tree<T, tree_node_allocator> tree<T, tree_node_allocator>::subtree(sibling_iterator from, sibling_iterator to) const
 	{
+	assert(from!=to); // if from==to, the range is empty, hence no tree to return.
+
 	tree tmp;
 	tmp.set_head(value_type());
 	tmp.replace(tmp.begin(), tmp.end(), from, to);
@@ -1785,6 +1787,8 @@ tree<T, tree_node_allocator> tree<T, tree_node_allocator>::subtree(sibling_itera
 template <class T, class tree_node_allocator>
 void tree<T, tree_node_allocator>::subtree(tree& tmp, sibling_iterator from, sibling_iterator to) const
 	{
+	assert(from!=to); // if from==to, the range is empty, hence no tree to return.
+
 	tmp.set_head(value_type());
 	tmp.replace(tmp.begin(), tmp.end(), from, to);
 	}

@@ -1,3 +1,10 @@
+2015-05-06  Kasper Peeters  <kasper.peeters@phi-sci.com>
+
+	* Released 3.1
+
+	* Added asserts in 'subtree' in order to warn users about
+	constructing empty subtrees.
+
 2014-12-25  Kasper Peeters  <kasper.peeters@phi-sci.com>
 
 	* Released 3.0
