@@ -1,3 +1,9 @@
+2015-07-13  Kasper Peeters  <kasper.peeters@phi-sci.com>
+
+	* Released 3.2
+
+	* Move constructor did the wrong thing with empty trees, fixed.
+
 2015-05-06  Kasper Peeters  <kasper.peeters@phi-sci.com>
 
 	* Released 3.1

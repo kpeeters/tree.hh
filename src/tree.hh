@@ -9,8 +9,8 @@
 
 /** \mainpage tree.hh
     \author   Kasper Peeters
-    \version  3.1
-    \date     06-May-2015
+    \version  3.2
+    \date     13-Jul-2015
     \see      http://tree.phi-sci.com/
     \see      http://tree.phi-sci.com/ChangeLog
 
@@ -503,12 +503,14 @@ template <class T, class tree_node_allocator>
 tree<T, tree_node_allocator>::tree(tree<T, tree_node_allocator>&& x) 
 	{
 	head_initialise_();
-	head->next_sibling=x.head->next_sibling;
-	feet->prev_sibling=x.head->prev_sibling;
-	x.head->next_sibling->prev_sibling=head;
-	x.feet->prev_sibling->next_sibling=feet;
-	x.head->next_sibling=x.feet;
-	x.feet->prev_sibling=x.head;
+	if(x.head->next_sibling!=x.feet) { // move tree if non-empty only
+		head->next_sibling=x.head->next_sibling;
+		feet->prev_sibling=x.head->prev_sibling;
+		x.head->next_sibling->prev_sibling=head;
+		x.feet->prev_sibling->next_sibling=feet;
+		x.head->next_sibling=x.feet;
+		x.feet->prev_sibling=x.head;
+		}
 	}
 
 template <class T, class tree_node_allocator>
@@ -1057,6 +1059,8 @@ iter tree<T, tree_node_allocator>::insert(iter position, const T& x)
 		position.node=feet; // Backward compatibility: when calling insert on a null node,
 		                    // insert before the feet.
 		}
+	assert(position.node!=head); // Cannot insert before head.
+
 	tree_node* tmp = alloc_.allocate(1,0);
 	alloc_.construct(tmp, x);
 //	kp::constructor(&tmp->data, x);
