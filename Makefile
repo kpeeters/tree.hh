@@ -1,5 +1,5 @@
 
-RELEASE=3.1
+RELEASE=3.7
 HTML=${HOME}/public_html/
 
 .PHONY: doc tarball
@@ -10,14 +10,14 @@ tarball:
 site: tarball doc
 	install -d ${HTML}/tree
 	install -d ${HTML}/tree/doxygen/html
-	install doc/index.html doc/tree.css doc/tree.jpg ChangeLog ${HTML}/tree
+	install doc/index.html doc/download.html doc/projects.html doc/documentation.html doc/tree.css doc/tree.jpg ChangeLog ${HTML}/tree
 	install src/test_tree.cc src/test_tree.output src/tree_example.cc src/tree.hh src/tree_util.hh ${HTML}/tree
 	install doxygen/html/* ${HTML}/tree/doxygen/html
 	install ${HOME}/tmp/tree-${RELEASE}.tar.gz ${HTML}/tree
 	install ${HOME}/tmp/kt_temp/kt_temp_tree/tree.pdf ${HTML}/tree
 
 upload:
-	rsync -avz ${HTML}/tree/ zmaya:tree
+	rsync -avz ${HTML}/tree/ fq2:/var/www/tree/
 
 doc:
 	(cd doc; kt -f tree.tex)

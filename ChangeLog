@@ -1,3 +1,9 @@
+2018-01-30  Kasper Peeters  <kasper.peeters@phi-sci.com>
+
+	* Release 3.6.
+
+	* Made various members static.
+
 2016-01-23  Kasper Peeters  <kasper.peeters@phi-sci.com>
 
 	* Released 3.4
