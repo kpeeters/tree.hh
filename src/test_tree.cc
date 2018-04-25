@@ -365,6 +365,22 @@ int main(int argc, char **argv)
 			 ++li;
 			 }
 
+		// Fixed-depth.
+		tree<std::string> fdt;
+		fdt.set_head("beings");
+		auto mammals = fdt.append_child(fdt.begin(), "mammals");
+		fdt.append_child(fdt.begin(), "birds");
+		fdt.append_child(mammals, "human");
+		auto felins = fdt.append_child(mammals, "felins");
+		fdt.append_child(mammals, "canids");
+		fdt.append_child(felins, "cats");
+
+		auto fi = tr.begin_fixed(felins, 0);
+		while(fdt.is_valid(fi)) {
+			std::cout << *fi << std::endl;
+			++fi;
+			}
+		
 //		test_move_constructor();
 
 		}

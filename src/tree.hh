@@ -9,8 +9,8 @@
 
 /** \mainpage tree.hh
     \author   Kasper Peeters
-    \version  3.7
-    \date     30-Jan-2018
+    \version  3.8
+    \date     23-Apr-2018
     \see      http://tree.phi-sci.com/
     \see      http://tree.phi-sci.com/ChangeLog
 
@@ -792,6 +792,10 @@ typename tree<T, tree_node_allocator>::fixed_depth_iterator tree<T, tree_node_al
 		++curdepth;
 		}
 
+	// Now walk back to the first sibling in this range.
+	while(tmp->prev_sibling!=0)
+		tmp=tmp->prev_sibling;	
+	
 	ret.node=tmp;
 	return ret;
 	}
