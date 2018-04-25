@@ -233,7 +233,11 @@ subtrees.
 \item[Erasing nodes and subtrees] In order to remove a node including
 its children from the tree, use the \member{erase(iterator)} call. If you
 just want to erase the children, but not the node itself, use the 
-\member{erase\_children(iterator)} call.
+\member{erase\_children(iterator)} call. 
+
+Erasing all siblings to the left or right of a given node is done
+using \member{erase\_left\_siblings(iterator)} and
+\member{erase\_right\_siblings(iterator)} respectively.
 
 \item[Replacing individual nodes or subtrees] 
 

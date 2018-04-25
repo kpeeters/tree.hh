@@ -1,14 +1,17 @@
 
-all: test1 test2
+all: test1 test2 test_tree
 
-%.o: %.cc 
-	g++ -g -c -Wall -O2 -std=c++11 -I. $^
+%.o: %.cc tree.hh
+	g++ -g -c -o $@ -Wall -O2 -std=c++11 -I. $<
 
-test1: test1.o
+test1: test1.o 
 	g++ -o test1 test1.o
 
 test2: test2.o 
 	g++ -o test2 test2.o
+
+test_tree: test_tree.o
+	g++ -o test_tree test_tree.o
 
 run_tests: test1 test1.req
 	./test1 > test1.res

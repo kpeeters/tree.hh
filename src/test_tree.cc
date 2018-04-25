@@ -374,7 +374,14 @@ int main(int argc, char **argv)
 		auto felins = fdt.append_child(mammals, "felins");
 		fdt.append_child(mammals, "canids");
 		fdt.append_child(felins, "cats");
-
+		print_tree(fdt, fdt.begin(), fdt.end());
+		fdt.debug_verify_consistency();
+		
+		auto path = tr.path_from_iterator(felins);
+		for(auto& p: path)
+			std::cerr << p << "/";
+		std::cerr << std::endl;
+		
 		auto fi = tr.begin_fixed(felins, 0);
 		while(fdt.is_valid(fi)) {
 			std::cout << *fi << std::endl;
