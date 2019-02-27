@@ -83,6 +83,11 @@ over all children at any depth below `two`. In the second output
 block, the depth member has been used to determine the distance of a
 given node to the root of the tree.
 
+Structure
+---------
+
+<img src="https://cdn.rawgit.com/kpeeters/tree.hh/master/doc/structure.png" />
+
 
 License
 -------
