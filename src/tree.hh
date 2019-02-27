@@ -9,8 +9,8 @@
 
 /** \mainpage tree.hh
     \author   Kasper Peeters
-    \version  3.9
-    \date     25-Apr-2018
+    \version  3.10
+    \date     27-Feb-2019
     \see      http://tree.phi-sci.com/
     \see      http://tree.phi-sci.com/ChangeLog
 
@@ -593,6 +593,8 @@ template <class T, class tree_node_allocator>
 tree<T,tree_node_allocator>& tree<T, tree_node_allocator>::operator=(tree<T, tree_node_allocator>&& x)
 	{
 	if(this != &x) {
+		clear(); // clear any existing data.
+		
 		head->next_sibling=x.head->next_sibling;
 		feet->prev_sibling=x.head->prev_sibling;
 		x.head->next_sibling->prev_sibling=head;
@@ -866,21 +868,21 @@ typename tree<T, tree_node_allocator>::path_t tree<T, tree_node_allocator>::path
 	{
 	path_t path;
 	tree_node *walk=iter.node;
-	std::cerr << "head:" << head << std::endl;
-	std::cerr << "feet:" << feet << std::endl;	
-	std::cerr << "****" << head->next_sibling->prev_sibling << std::endl;
+//	std::cerr << "head:" << head << std::endl;
+//	std::cerr << "feet:" << feet << std::endl;	
+//	std::cerr << "****" << head->next_sibling->prev_sibling << std::endl;
 		
 	do {
 		if(path.size()>0)
 			walk=walk->parent;
 		int num=0;
-		std::cerr << walk->data << ":" ;
-		std::cerr << "(" << walk << ")" << std::endl;
+//		std::cerr << walk->data << ":" ;
+//		std::cerr << "(" << walk << ")" << std::endl;
 		while(walk->prev_sibling!=0 && walk->prev_sibling!=head) {
 			++num;
 			walk=walk->prev_sibling;
-			std::cerr << walk->data; 
-			std::cerr << " (" << walk << ")" << std::endl;
+//			std::cerr << walk->data; 
+//			std::cerr << " (" << walk << ")" << std::endl;
 			}
 		path.push_back(num);
 		} while(walk->parent!=0);
