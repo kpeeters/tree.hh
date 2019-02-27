@@ -1,6 +1,8 @@
 tree.hh: an STL-like C++ tree class
 ===================================
 
+by Kasper Peeters <kasper.peeters@phi-sci.com>
+
 The tree.hh library for C++ provides an STL-like container class for
 n-ary trees, templated over the data stored at the nodes. Various
 types of iterators are provided (post-order, pre-order, and
@@ -80,3 +82,12 @@ displays the children directly below `two`. The second block iterates
 over all children at any depth below `two`. In the second output
 block, the depth member has been used to determine the distance of a
 given node to the root of the tree.
+
+
+License
+-------
+
+In principle, the tree.hh code is available under the terms of the GNU
+General Public License 2 or 3. However, if you would like to use
+tree.hh under different conditions, contact me and we will work
+something out.
