@@ -8,10 +8,17 @@ others). Where possible the access methods are compatible with the STL
 or alternative algorithms are available. The library is available
 under the terms of the GNU General Public License version 2 or 3.
 
+What you need
+-------------
+
+The tree.hh is header-only; you only need to copy the `src/tree.hh`
+header file into your project and you are good to go.
+
+
 Sample use
 ----------
 
-The following is a small sample program to illustrate how `tree.hh` is used:
+The following is a small sample program to illustrate how `tree.hh` is used::
 
     #include <algorithm>
     #include <string>
@@ -53,7 +60,7 @@ The following is a small sample program to illustrate how `tree.hh` is used:
        }
     }
 
-The output of this program is
+The output of this program is::
 
     apple
     banana
