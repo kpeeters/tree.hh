@@ -86,7 +86,7 @@ given node to the root of the tree.
 Structure
 ---------
 
-- `raw.githubusercontent.com/kpeeters/tree.hh/master/doc/structure.png?sanitize=true&raw=true`
+.. image:: https://raw.githubusercontent.com/kpeeters/tree.hh/master/doc/structure.png
 
 
 License
