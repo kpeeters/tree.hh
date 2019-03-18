@@ -92,7 +92,7 @@ Structure
 Projects using tree.hh
 ----------------------
 
-The ``tree.hh`` library is used in various projects::
+The ``tree.hh`` library is used in various projects:
 
 - Cadabra (https://cadabra.science/), a field-theory motivated
   approach to symbolic computer algebra.
