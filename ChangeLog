@@ -1,3 +1,13 @@
+2019-03-18  Kasper Peeters  <kasper.peeters@phi-sci.com>
+
+	* Release 3.11
+
+	* Add 'node_in_subtree' function to determine if a node is in a
+	given subtree.
+
+	* Update path logic to cover subtrees and handle out-of-range
+	errors gracefully.
+
 2019-02-27  Kasper Peeters  <kasper.peeters@phi-sci.com>
 
 	* Release 3.10
