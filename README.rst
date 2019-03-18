@@ -89,6 +89,65 @@ Structure
 .. image:: https://raw.githubusercontent.com/kpeeters/tree.hh/master/doc/structure.png
 
 
+Projects using tree.hh
+----------------------
+
+The ``tree.hh`` library is used in various projects::
+
+- Cadabra (https://cadabra.science/), a field-theory motivated
+  approach to symbolic computer algebra.
+
+- Gnash (http://www.gnu.org/software/gnash/), a GNU Flash movie
+  player. Previously, it was only possible to play flash movies with
+  proprietary software. While there are some other free flash players,
+  none support anything beyond SWF v4. Gnash is based on GameSWF, and
+  supports many SWF v7 features.
+
+- htmlcxx (http://htmlcxx.sourceforge.net/), a simple non-validating
+  css1 and html parser for C++.
+
+- Principles of Compiler Design
+  (http://www.cs.sfu.ca/~anoop/courses/CMPT-379-Fall-2007/index.html),
+  a course in compiler design at the Simon Fraser University, Canada.
+
+- liborigin (http://sourceforge.net/projects/liborigin/), a library
+  for reading OriginLab OPJ project files, which is used by QtiPlot
+  (http://soft.proindependent.com/qtiplot.html) and LabPlot
+  (http://labplot.sourceforge.net/), two applications for data
+  analysis and visualisation.
+
+- EChem++
+  (http://www.echem.uni-tuebingen.de/~bs/echem/software/EChem++/echem++.shtml),
+  a project realizing the idea of a Problem Solving Environment (PSE)
+  in the field of computational electrochemistry.  Computer controlled
+  experimental measurements, numerical simulation and analysis of
+  electrochemical processes will be combined under a common user
+  interface.
+
+- LZCS (http://www.infor.uva.es/~jadiego/), a semistructured document
+  transformation tool. LZCS compresses structured documents taking
+  advantage of the redundant information that can appear in the
+  structure. The main idea is that frequently repeated subtrees may
+  exist and these can be replaced by a backward reference to their
+  first occurance. See the paper
+  (http://www.dcc.uchile.cl/~gnavarro/ps/dcc04.1.ps.gz).
+
+- libOFX (http://libofx.sourceforge.net/), a parser and an API
+  designed to allow applications to very easily support OFX command
+  responses, usually provided by financial institutions for statement
+  downloads.
+
+- A genetic programming project
+  (http://www.cs.adfa.edu.au/~shanyin/publications/peel.pdf).
+
+- FreeLing (http://nlp.lsi.upc.edu/freeling/) a library providing
+  language analysis services (such as morfological analysis, date
+  recognition, PoS tagging, and so on.
+
+Let me know about your project when you are using ``tree.hh``, so that
+I can add it to the list.
+
+
 License
 -------
 
