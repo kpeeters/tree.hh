@@ -3,12 +3,18 @@ tree.hh: an STL-like C++ tree class
 
 by Kasper Peeters <kasper.peeters@phi-sci.com>
 
-The tree.hh library for C++ provides an STL-like container class for
+The ``tree.hh`` library for C++ provides an STL-like container class for
 n-ary trees, templated over the data stored at the nodes. Various
 types of iterators are provided (post-order, pre-order, and
 others). Where possible the access methods are compatible with the STL
-or alternative algorithms are available. The library is available
-under the terms of the GNU General Public License version 2 or 3.
+or alternative algorithms are available.
+
+The library should work with any C++11 compiler, and has been used and
+tested on all major platforms (Linux, Windows, macOS, Android, iOS). 
+
+The library is available under the terms of the GNU General Public
+License version 2 or 3.
+
 
 What you need
 -------------

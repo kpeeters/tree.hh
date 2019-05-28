@@ -377,7 +377,7 @@ int main(int argc, char **argv)
 		print_tree(fdt, fdt.begin(), fdt.end());
 		fdt.debug_verify_consistency();
 		
-		auto path = tr.path_from_iterator(felins);
+		auto path = tr.path_from_iterator(felins, fdt.begin());
 		for(auto& p: path)
 			std::cerr << p << "/";
 		std::cerr << std::endl;

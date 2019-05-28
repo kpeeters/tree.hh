@@ -9,10 +9,10 @@
 
 /** \mainpage tree.hh
     \author   Kasper Peeters
-    \version  3.12
-    \date     18-Mar-2019
+    \version  3.13
+    \date     28-Mar-2019
     \see      http://tree.phi-sci.com/
-    \see      http://tree.phi-sci.com/ChangeLog
+    \see      http://github.com/kpeeters/tree.hh/
 
    The tree.hh library for C++ provides an STL-like container class
    for n-ary trees, templated over the data stored at the
@@ -376,7 +376,7 @@ class tree {
 		/// Inverse of take_out: inserts the given tree as previous sibling of indicated node by a 
 		/// move operation, that is, the given tree becomes empty. Returns iterator to the top node.
 		template<typename iter> iter move_in(iter, tree&);
-		/// As above, but now make the tree a child of the indicated node.
+		/// As above, but now make the tree the last child of the indicated node.
 		template<typename iter> iter move_in_below(iter, tree&);
 		/// As above, but now make the tree the nth child of the indicated node (if possible).
 		template<typename iter> iter move_in_as_nth_child(iter, size_t, tree&);
@@ -1845,6 +1845,15 @@ template<typename iter> iter tree<T, tree_node_allocator>::move_in(iter loc, tre
 	other.feet->prev_sibling=other.head;
 
 	return other_first_head;
+	}
+
+template <class T, class tree_node_allocator>
+template<typename iter> iter tree<T, tree_node_allocator>::move_in_below(iter loc, tree& other)
+	{
+	if(other.head->next_sibling==other.feet) return loc; // other tree is empty
+
+	auto n = other.number_of_children(loc);
+	return move_in_as_nth_child(loc, n, other);
 	}
 
 template <class T, class tree_node_allocator>

@@ -67,14 +67,20 @@ void test_move_in_as_nth_child(int n)
 	std::cout << "\n";
 	}
 
-void test_move_below(tree<std::string>& other)
+void test_move_in_below()
 	{
-	tree<std::string> mtree;
+	tree<std::string> mtree, other;
 	tree<std::string>::iterator it = mtree.set_head("top");
 	mtree.append_child(it, "one");
-	auto it3=mtree.append_child(it, "three");
+	mtree.append_child(it, "three");
 
-	mtree.move_in(it3, other);
+	auto ot1 = other.set_head("hi");
+	other.insert_after(ot1, "second");
+	other.append_child(ot1, "1");
+	other.append_child(ot1, "2");
+	
+	mtree.move_in_below(it, other);
+	mtree.debug_verify_consistency();
 	kptree::print_tree_bracketed(mtree);
 	}
 
@@ -93,12 +99,17 @@ int main(int argc, char **argv)
 	std::cout << std::endl;
 
 	// Move in.
+	std::cout << "test_move_in:\n";
 	test_move_in(res2);
 	std::cout << "\n";
-	kptree::print_tree_bracketed(res2);
-	std::cout << "\n";
 
+	// Move in as last child.
+	std::cout << "test_move_in_below:\n";
+	test_move_in_below();
+	std::cout << "\n\n";
+	
 	// Move in as nth child.
+	std::cout << "test_move_in_as_nth_child:\n";
 	test_move_in_as_nth_child(0);
 	test_move_in_as_nth_child(1);
 	test_move_in_as_nth_child(2);
@@ -106,6 +117,6 @@ int main(int argc, char **argv)
 		test_move_in_as_nth_child(3);
 		}
 	catch(const std::range_error& ex) {
-		std::cout << ex.what() << std::endl;
+		std::cout << "correct exception: " << ex.what() << std::endl;
 		}
 	}
