@@ -1,3 +1,28 @@
+2020-10-26  Kasper Peeters  <kasper.peeters@phi-sci.com>
+
+	* Release 3.15
+
+	* Convert to allocator_traits for all allocator functions, instead
+	of calling them directly.
+
+	* Make `parent` throw an exception rather than bailing out with an
+	assert. 
+
+2019-09-21  Kasper Peeters  <kasper.peeters@phi-sci.com>
+
+	* Release 3.14
+
+	* Add version of `depth` which takes a predicate function to
+	determine whether a particular level in the tree should increase
+	the counter or not.
+
+	* Add new `distance` function to determine vertical distance
+	between two nodes (like `depth`, but between two nodes, not
+	between a node and the top level).
+
+	* Fix bug in move_before which would leave the tree in an
+	inconsistent state.
+
 2019-05-28  Kasper Peeters  <kasper.peeters@phi-sci.com>
 
 	* Release 3.13
