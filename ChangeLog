@@ -1,9 +1,13 @@
 2020-11-07  Kasper Peeters  <kasper.peeters@phi-sci.com>
 
+	* Release 3.17
+
+	* Apply a similar fix to the move constructor.
+
 	* Release 3.16
 
 	* Fix error in move assignment operator which caused tree
-	corruptioin (thanks to Trevor Hickey for reporting the bug).
+	corruption (thanks to Trevor Hickey for reporting the bug).
 
 2020-10-26  Kasper Peeters  <kasper.peeters@phi-sci.com>
 

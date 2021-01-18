@@ -103,6 +103,9 @@ The ``tree.hh`` library is used in various projects:
 - Cadabra (https://cadabra.science/), a field-theory motivated
   approach to symbolic computer algebra.
 
+- Taxator-tk (https://github.com/fungs/taxator-tk/), a set of programs
+  for the taxonomic analysis of nucleotide sequence data.
+
 - Gnash (http://www.gnu.org/software/gnash/), a GNU Flash movie
   player. Previously, it was only possible to play flash movies with
   proprietary software. While there are some other free flash players,
