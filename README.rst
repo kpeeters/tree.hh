@@ -22,6 +22,8 @@ What you need
 The tree.hh is header-only; you only need to copy the `src/tree.hh`
 header file into your project and you are good to go.
 
+Then scan the example below and consult the [documentation](doc/main.md).
+
 
 Sample use
 ----------
