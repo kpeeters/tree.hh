@@ -19,7 +19,8 @@ License version 2 or 3.
 What you need
 -------------
 
-The tree.hh is header-only; you only need to copy the `src/tree.hh`
+The tree.hh is header-only; you only need to copy the `src/tree.hh
+<https://raw.githubusercontent.com/kpeeters/tree.hh/master/src/tree.hh>`_
 header file into your project and you are good to go.
 
 Then scan the example below and consult the `documentation <doc/main.md>`_.
