@@ -86,7 +86,7 @@ class navigation_error : public std::logic_error {
 //			std::cerr << boost::stacktrace::stacktrace() << std::endl;
 //			str << boost::stacktrace::stacktrace();
 //			stacktrace=str.str();
-			};
+			}
 
 //		virtual const char *what() const noexcept override
 //			{
@@ -503,7 +503,7 @@ class tree {
 		template<class StrictWeakOrdering>
 		class compare_nodes {
 			public:
-				compare_nodes(StrictWeakOrdering comp) : comp_(comp) {};
+				compare_nodes(StrictWeakOrdering comp) : comp_(comp) {}
 				
 				bool operator()(const tree_node *a, const tree_node *b) 
 					{
