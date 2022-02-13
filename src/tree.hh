@@ -9,8 +9,8 @@
 
 /** \mainpage tree.hh
     \author   Kasper Peeters
-    \version  3.17
-    \date     07-Nov-2020
+    \version  3.18
+    \date     13-Feb-2021
     \see      http://tree.phi-sci.com/
     \see      http://github.com/kpeeters/tree.hh/
 
@@ -34,7 +34,7 @@
 #include <queue>
 #include <algorithm>
 #include <cstddef>
-
+#include <string>
 
 /// A node in the tree, combining links to other nodes as well as the actual data.
 template<class T>
@@ -86,7 +86,7 @@ class navigation_error : public std::logic_error {
 //			std::cerr << boost::stacktrace::stacktrace() << std::endl;
 //			str << boost::stacktrace::stacktrace();
 //			stacktrace=str.str();
-			};
+			}
 
 //		virtual const char *what() const noexcept override
 //			{
@@ -503,7 +503,7 @@ class tree {
 		template<class StrictWeakOrdering>
 		class compare_nodes {
 			public:
-				compare_nodes(StrictWeakOrdering comp) : comp_(comp) {};
+				compare_nodes(StrictWeakOrdering comp) : comp_(comp) {}
 				
 				bool operator()(const tree_node *a, const tree_node *b) 
 					{

@@ -108,7 +108,26 @@ keep effect for a single increment or decrement of the
 iterator. Finally, whether or not an iterator is actually pointing at
 a node (i.e.~is not an "end" iterator) can be tested using the
 ``is_valid(iterator)`` member of the tree class.
-   
+
+- **Paths**:
+
+  Tree iterators, like those for all STL containers, are tied to the
+  container, and cannot simply be used to "access an element at the
+  same location in a different tree" (they are, in essence, wrappers
+  for pointers to memory locations). If you want a representation of
+  the iterator which is independent of the particular location where
+  your tree is located in memory, use the following two methods:
+  
+  ``path_from_iterator(iterator, top)``: obtain a ``path_t`` object
+  from an iterator, relative to the iterator ``top``.
+  
+  ``iterator_from_path(path, top)``: the inverse of the above, that
+  is, obtain an iterator from a ``path_t`` object.
+  
+  Paths are simply vectors of integers, indicating which child branch
+  to follow at every depth of the tree. See ``src/sample_path.cc`` for
+  an example.
+  
    
 Basic operations
 ----------------
