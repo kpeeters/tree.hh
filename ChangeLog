@@ -1,6 +1,10 @@
 2022-02-13  Kasper Peeters  <kasper.peeters@phi-sci.com>
 
+	* Release 3.18
+
 	* Include <string> to avoid compilation errors.
+
+	* Add documentation and sample program for path_t.
 
 2020-11-07  Kasper Peeters  <kasper.peeters@phi-sci.com>
 
