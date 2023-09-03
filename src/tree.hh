@@ -505,7 +505,7 @@ class tree {
 			public:
 				compare_nodes(StrictWeakOrdering comp) : comp_(comp) {}
 				
-				bool operator()(const tree_node *a, const tree_node *b) 
+				bool operator()(const tree_node *a, const tree_node *b) const
 					{
 					return comp_(a->data, b->data);
 					}
