@@ -1860,7 +1860,6 @@ tree<T, tree_node_allocator> tree<T, tree_node_allocator>::move_out(iterator sou
 	// Move source node into the 'ret' tree.
 	ret.head->next_sibling = source.node;
 	ret.feet->prev_sibling = source.node;
-	source.node->parent=0;
 
 	// Close the links in the current tree.
 	if(source.node->prev_sibling!=0) 
@@ -1869,6 +1868,22 @@ tree<T, tree_node_allocator> tree<T, tree_node_allocator>::move_out(iterator sou
 	if(source.node->next_sibling!=0) 
 		source.node->next_sibling->prev_sibling = source.node->prev_sibling;
 
+	// If the moved-out node was a first or last child of
+	// the parent, adjust those links.
+	if(source.node->parent->first_child==source.node) { 
+		if(source.node->next_sibling!=0)
+			source.node->parent->first_child=source.node->next_sibling;
+		else
+			source.node->parent->first_child=0;
+		}
+	if(source.node->parent->last_child==source.node) { 
+		if(source.node->prev_sibling!=0)
+			source.node->parent->last_child=source.node->prev_sibling;
+		else
+			source.node->parent->last_child=0;
+		}
+	source.node->parent=0;
+	
 	// Fix source prev/next links.
 	source.node->prev_sibling = ret.head;
 	source.node->next_sibling = ret.feet;
