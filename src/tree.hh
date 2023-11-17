@@ -1,7 +1,7 @@
 
 //	STL-like templated tree class.
 //
-// Copyright (C) 2001-2020 Kasper Peeters <kasper@phi-sci.com>
+// Copyright (C) 2001-2023 Kasper Peeters <kasper@phi-sci.com>
 // Distributed under the GNU General Public License version 3.
 //
 // Special permission to use tree.hh under the conditions of a 
@@ -9,9 +9,8 @@
 
 /** \mainpage tree.hh
     \author   Kasper Peeters
-    \version  3.18
-    \date     13-Feb-2021
-    \see      http://tree.phi-sci.com/
+    \version  3.19
+    \date     2023-11-17
     \see      http://github.com/kpeeters/tree.hh/
 
    The tree.hh library for C++ provides an STL-like container class
@@ -363,6 +362,7 @@ class tree {
 		template<typename iter> iter insert(iter position, T&& x);
 		/// Specialisation of previous member.
 		sibling_iterator insert(sibling_iterator position, const T& x);
+		sibling_iterator insert(sibling_iterator position, T&& x);
 		/// Insert node (with children) pointed to by subtree as previous sibling of node pointed to by position.
 		/// Does not change the subtree itself (use move_in or move_in_below for that).
 		template<typename iter> iter insert_subtree(iter position, const iterator_base& subtree);
@@ -1339,6 +1339,37 @@ typename tree<T, tree_node_allocator>::sibling_iterator tree<T, tree_node_alloca
 	{
 	tree_node *tmp=std::allocator_traits<decltype(alloc_)>::allocate(alloc_, 1, 0);
 	std::allocator_traits<decltype(alloc_)>::construct(alloc_, tmp, x);
+	tmp->first_child=0;
+	tmp->last_child=0;
+
+	tmp->next_sibling=position.node;
+	if(position.node==0) { // iterator points to end of a subtree
+		tmp->parent=position.parent_;
+		tmp->prev_sibling=position.range_last();
+		tmp->parent->last_child=tmp;
+		}
+	else {
+		tmp->parent=position.node->parent;
+		tmp->prev_sibling=position.node->prev_sibling;
+		position.node->prev_sibling=tmp;
+		}
+
+	if(tmp->prev_sibling==0) {
+		if(tmp->parent) // when inserting nodes at the head, there is no parent
+			tmp->parent->first_child=tmp;
+		}
+	else
+		tmp->prev_sibling->next_sibling=tmp;
+	return tmp;
+	}
+
+template <class T, class tree_node_allocator>
+typename tree<T, tree_node_allocator>::sibling_iterator tree<T, tree_node_allocator>::insert(sibling_iterator position, T&& x)
+	{
+	tree_node *tmp=std::allocator_traits<decltype(alloc_)>::allocate(alloc_, 1, 0);
+	std::allocator_traits<decltype(alloc_)>::construct(alloc_, tmp);
+	std::swap(tmp->data, x); // Move semantics
+
 	tmp->first_child=0;
 	tmp->last_child=0;
 
