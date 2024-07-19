@@ -1,3 +1,10 @@
+2024-04-12  Kasper Peeters  <kasper@klinm1>
+
+	* Release 3.20
+
+	* Addd operator= for sibling_iterator and fixed_depth_iterator
+	(need to do this for the other iterators too).
+
 2022-02-13  Kasper Peeters  <kasper.peeters@phi-sci.com>
 
 	* Release 3.18

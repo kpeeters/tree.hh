@@ -164,6 +164,6 @@ License
 -------
 
 In principle, the tree.hh code is available under the terms of the GNU
-General Public License 2 or 3. However, if you would like to use
+General Public License version 3. However, if you would like to use
 tree.hh under different conditions, contact me and we will work
 something out.
